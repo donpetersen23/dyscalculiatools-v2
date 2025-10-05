@@ -14,4 +14,4 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
       - name: Deploy to S3
-        run: aws s3 sync . s3://dyscalculiatools.com --exclude ".git/*" --exclude ".github/*"
+        run: aws s3 sync . s3://dyscalculia-tools-187249759 --exclude ".git/*" --exclude ".github/*" --exclude "cloudformation.yml" --exclude "bucket-policy.json"

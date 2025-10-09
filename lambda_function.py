@@ -60,15 +60,13 @@ def handle_search(event):
         
         # Search for real research
         results = research_assistant.get_real_studies(intervention)
-        brief = research_assistant.search_intervention(intervention)
         
         return {
             'statusCode': 200,
             'headers': {'Access-Control-Allow-Origin': '*'},
             'body': json.dumps({
                 'intervention': intervention,
-                'results': results,
-                'brief': brief
+                'results': results
             })
         }
         

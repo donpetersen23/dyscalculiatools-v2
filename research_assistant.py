@@ -23,11 +23,17 @@ class DyscalculiaResearchAssistant:
         
         try:
             response = requests.get(f"{self.eric_base_url}search", params=params)
+            print(f"ERIC status: {response.status_code}")
             if response.status_code == 200:
                 data = response.json()
-                return self._format_eric_results(data)
+                results = self._format_eric_results(data)
+                print(f"ERIC results count: {len(results)}")
+                return results
+            else:
+                print(f"ERIC error: Status {response.status_code}")
         except Exception as e:
-            return f"ERIC search error: {e}"
+            print(f"ERIC exception: {e}")
+            return []
         
         return []
     
@@ -62,10 +68,16 @@ class DyscalculiaResearchAssistant:
         try:
             time.sleep(1)  # Rate limiting
             response = requests.get(url, headers=self.headers)
+            print(f"Scholar status: {response.status_code}")
             if response.status_code == 200:
-                return self._parse_scholar_results(response.text)
+                results = self._parse_scholar_results(response.text)
+                print(f"Scholar results count: {len(results)}")
+                return results
+            else:
+                print(f"Scholar error: Status {response.status_code}")
         except Exception as e:
-            return f"Google Scholar search error: {e}"
+            print(f"Scholar exception: {e}")
+            return []
         
         return []
     

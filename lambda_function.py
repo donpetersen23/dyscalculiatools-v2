@@ -1,6 +1,10 @@
 import json
 import boto3
+import logging
 from research_assistant import DyscalculiaResearchAssistant
+
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
 
 def lambda_handler(event, context):
     """AWS Lambda handler for the research assistant API"""
@@ -59,7 +63,10 @@ def handle_search(event):
         research_assistant = DyscalculiaResearchAssistant()
         
         # Search for real research
+        logger.info(f"Searching for: {intervention}")
         results = research_assistant.get_real_studies(intervention)
+        logger.info(f"Results found: {len(results) if isinstance(results, list) else 'error'}")
+        logger.info(f"Results: {results}")
         
         return {
             'statusCode': 200,

@@ -1,0 +1,37 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Dyscalculia Research Assistant Serverless API
+Globals:
+  Function:
+    Timeout: 30
+    MemorySize: 512
+Resources:
+  DyscalculiaResearchAPI:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: DyscalculiaResearchAPI
+      Handler: lambda_function.lambda_handler
+      Runtime: python3.11
+      Events:
+        SearchAPI:
+          Type: Api
+          Properties:
+            Path: /api/search
+            Method: post
+        GenerateBriefAPI:
+          Type: Api
+          Properties:
+            Path: /api/generate-brief
+            Method: post
+        OptionsAPI:
+          Type: Api
+          Properties:
+            Path: /{proxy+}
+            Method: options
+    Metadata:
+      SamResourceId: DyscalculiaResearchAPI
+Outputs:
+  DyscalculiaResearchAPI:
+    Description: API Gateway endpoint URL
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/

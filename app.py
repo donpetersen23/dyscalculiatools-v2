@@ -1,13 +1,19 @@
 from flask import Flask, request, jsonify, render_template_string
 from flask_cors import CORS
-from research_assistant import DyscalculiaResearchAssistant
+import json
 import os
+import html
 
 app = Flask(__name__)
 CORS(app)
 
-# Initialize research assistant
-research_assistant = DyscalculiaResearchAssistant()
+# Load research metadata
+def load_research_data():
+    try:
+        with open('Research/research_metadata.json', 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return []
 
 @app.route('/')
 def home():
@@ -17,6 +23,10 @@ def home():
 def styles():
     return app.response_class(open('styles.css').read(), mimetype='text/css')
 
+@app.route('/array-tool.html')
+def array_tool():
+    return render_template_string(open('array-tool.html').read())
+
 @app.route('/research')
 def research_page():
     return render_template_string(open('research.html').read())
@@ -25,56 +35,52 @@ def research_page():
 def search_research():
     try:
         data = request.get_json()
-        intervention = data.get('intervention', '')
+        query = data.get('query', '').lower()
         
-        if not intervention:
-            return jsonify({'error': 'No intervention specified'}), 400
+        if not query:
+            return jsonify({'error': 'No search query provided'}), 400
         
-        # Search for real research
-        results = research_assistant.get_real_studies(intervention)
+        # Load and search research data
+        research_data = load_research_data()
+        results = []
+        
+        for study in research_data:
+            # Search in title, summary, and dyscalculia_relevance
+            searchable_text = f"{study.get('title', '')} {study.get('summary', '')} {study.get('dyscalculia_relevance', '')}".lower()
+            
+            if query in searchable_text:
+                results.append({
+                    'title': html.unescape(study.get('title', 'Unknown Title')),
+                    'authors': study.get('authors', []),
+                    'year': study.get('publication_year', 'Unknown'),
+                    'relevance_score': study.get('relevance_score', 0),
+                    'summary': html.unescape(study.get('summary', '')),
+                    'dyscalculia_relevance': html.unescape(study.get('dyscalculia_relevance', '')),
+                    'filename': study.get('filename', '')
+                })
+        
+        # Sort by relevance score (highest first)
+        results.sort(key=lambda x: x['relevance_score'], reverse=True)
         
         return jsonify({
-            'intervention': intervention,
-            'results': results
+            'query': query,
+            'results': results[:20],  # Limit to top 20 results
+            'total_found': len(results)
         })
         
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@app.route('/api/generate-brief', methods=['POST'])
-def generate_brief():
-    try:
-        data = request.get_json()
-        intervention = data.get('intervention', '')
-        studies = data.get('studies', [])
-        
-        brief = f"""
-EVIDENCE BRIEF: {intervention.upper()} FOR DYSCALCULIA
-
-RESEARCH SUMMARY:
-Based on {len(studies)} studies found in academic databases.
-
-KEY FINDINGS:
-• Intervention shows promise for students with dyscalculia
-• Improvements noted in number sense and computational skills
-• Requires consistent implementation for best results
-
-IMPLEMENTATION RECOMMENDATIONS:
-1. Start with brief 10-15 minute sessions
-2. Use concrete materials before abstract concepts
-3. Monitor progress weekly
-4. Adapt based on individual student needs
-
-SUPPORTING STUDIES:
-"""
-        
-        for i, study in enumerate(studies, 1):
-            brief += f"{i}. {study.get('title', 'Unknown title')} ({study.get('year', 'Unknown year')})\n"
-        
-        return jsonify({'brief': brief})
-        
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
+@app.route('/api/popular-queries', methods=['GET'])
+def get_popular_queries():
+    return jsonify({
+        'queries': [
+            'multiplication facts',
+            'number sense',
+            'math anxiety', 
+            'visual strategies'
+        ]
+    })
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)

@@ -2,5 +2,240 @@
 body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
 header { background: #2c3e50; color: white; text-align: center; padding: 2rem; }
 main { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; }
+.welcome { background: #fff; padding: 2rem; margin-bottom: 2rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+.welcome h2 { color: #2c3e50; margin-bottom: 1rem; }
+.welcome p { margin-bottom: 1rem; line-height: 1.7; }
+
+.action-buttons { text-align: center; margin: 2rem 0; }
+.primary-btn, .secondary-btn { 
+    padding: 1rem 2rem; 
+    margin: 0 0.5rem; 
+    border: none; 
+    border-radius: 8px; 
+    font-size: 1.1rem; 
+    cursor: pointer; 
+    transition: all 0.3s ease;
+    background: #3498db; 
+    color: white; 
+}
+.primary-btn:hover, .primary-btn.active, .secondary-btn:hover, .secondary-btn.active { 
+    background: #2980b9; 
+    transform: translateY(-2px);
+}
+
+.content-container {
+    position: relative;
+    min-height: 600px;
+    margin: 2rem 0;
+}
+
+.content-section { 
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    padding: 2rem; 
+    background: #fff; 
+    border-radius: 8px; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.content-section h2 { 
+    color: #2c3e50; 
+    margin-bottom: 1.5rem; 
+    text-align: center;
+}
+
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; }
 .card { background: #f8f9fa; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #3498db; }
+.problem-card { position: relative; }
+.problem-card h3 { color: #2c3e50; font-size: 1.1rem; margin-bottom: 0.5rem; }
+.coming-soon { 
+    position: absolute; 
+    top: 1rem; 
+    right: 1rem; 
+    background: #e74c3c; 
+    color: white; 
+    padding: 0.25rem 0.5rem; 
+    border-radius: 4px; 
+    font-size: 0.8rem;
+}
+.tool-link {
+    display: inline-block;
+    background: #27ae60;
+    color: white;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-top: 0.5rem;
+    transition: all 0.3s ease;
+}
+.tool-link:hover {
+    background: #229954;
+    transform: translateY(-1px);
+}
+
+.search-container {
+    display: flex;
+    max-width: 600px;
+    margin: 0 auto 2rem auto;
+    gap: 0.5rem;
+}
+.search-container input {
+    flex: 1;
+    padding: 0.75rem;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+.search-container button {
+    padding: 0.75rem 1.5rem;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.search-container button:hover {
+    background: #2980b9;
+}
+
+.research-tags {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+.research-tags h3 {
+    margin-bottom: 1rem;
+    color: #2c3e50;
+}
+.tag-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+.tag-btn {
+    padding: 0.4rem 0.8rem;
+    background: #e8f4f8;
+    color: #2c3e50;
+    border: 1px solid #3498db;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+.tag-btn:hover {
+    background: #3498db;
+    color: white;
+    transform: translateY(-1px);
+}
+
+.search-results {
+    margin-top: 2rem;
+}
+.study-result {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    border-left: 4px solid #3498db;
+}
+.study-result h4 {
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.auth-buttons {
+    position: absolute;
+    top: 1rem;
+    right: 2rem;
+}
+.auth-buttons button {
+    margin-left: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.auth-buttons button:hover {
+    background: #2980b9;
+}
+
+.community-btn {
+    background: #27ae60 !important;
+    color: white;
+}
+.community-btn:hover, .community-btn.active {
+    background: #229954 !important;
+    transform: translateY(-2px);
+}
+
+.community-prompt {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+.community-prompt ul {
+    text-align: left;
+    margin: 2rem 0;
+}
+.join-btn {
+    background: #27ae60;
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+.join-btn:hover {
+    background: #229954;
+}
+
+.modal {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+.modal-content {
+    background-color: white;
+    margin: 15% auto;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+}
+.close {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+.modal form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.modal input, .modal select {
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+.modal button {
+    padding: 0.75rem;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.modal button:hover {
+    background: #2980b9;
+}

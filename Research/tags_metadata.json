@@ -1,0 +1,219 @@
+{
+    "machine learning": {
+        "dyscalculia_relevance": "Machine learning techniques can be used to develop models for predicting, diagnosing, and understanding dyscalculia by analyzing patterns in data.",
+        "tag_type": "supportive",
+        "research_source": "Ali, 2025, Developing an explainable machine learning and fog computing-based visual rating scale for the prediction of dementia progression",
+        "usage_count": 2,
+        "sources": [
+            "Ali2025.pdf",
+            "Alkahtani2025.pdf"
+        ]
+    },
+    "cognitive impairment": {
+        "dyscalculia_relevance": "Dyscalculia is a specific type of cognitive impairment related to difficulties in understanding numbers and learning math facts.",
+        "tag_type": "direct",
+        "research_source": "Ali, 2025, Developing an explainable machine learning and fog computing-based visual rating scale for the prediction of dementia progression",
+        "usage_count": 1,
+        "sources": [
+            "Ali2025.pdf"
+        ]
+    },
+    "early detection": {
+        "dyscalculia_relevance": "Early detection of dyscalculia is crucial for providing timely interventions and support to affected individuals.",
+        "tag_type": "direct",
+        "research_source": "Ali, 2025, Developing an explainable machine learning and fog computing-based visual rating scale for the prediction of dementia progression",
+        "usage_count": 2,
+        "sources": [
+            "Ali2025.pdf"
+        ]
+    },
+    "mental test scores": {
+        "dyscalculia_relevance": "Mental test scores are often used to assess cognitive abilities, including mathematical skills, and can indicate the presence of dyscalculia.",
+        "tag_type": "direct",
+        "research_source": "Ali, 2025, Developing an explainable machine learning and fog computing-based visual rating scale for the prediction of dementia progression",
+        "usage_count": 1,
+        "sources": [
+            "Ali2025.pdf"
+        ]
+    },
+    "fog computing": {
+        "dyscalculia_relevance": "Fog computing can be used to process and analyze data closer to the source, which might be relevant in scenarios where real-time data analysis is needed for early detection or intervention in dyscalculia.",
+        "tag_type": "supportive",
+        "research_source": "Ali, 2025, Developing an explainable machine learning and fog computing-based visual rating scale for the prediction of dementia progression",
+        "usage_count": 1,
+        "sources": [
+            "Ali2025.pdf"
+        ]
+    },
+    "natural products": {
+        "dyscalculia_relevance": "Refers to the use of natural substances in drug discovery, which may have implications for treating cognitive disabilities like dyscalculia.",
+        "tag_type": "supportive",
+        "research_source": "Albratty, 2025, Natural Products for Drug Discovery in Cognitive Disabilities: Bibliometric Hotspots, Research Trends, Conceptual Framework, and Future Directions",
+        "usage_count": 2,
+        "sources": [
+            "Albratty2025.pdf"
+        ]
+    },
+    "cognitive disabilities": {
+        "dyscalculia_relevance": "Dyscalculia is a type of cognitive disability specifically affecting mathematical abilities.",
+        "tag_type": "direct",
+        "research_source": "Albratty, 2025, Natural Products for Drug Discovery in Cognitive Disabilities: Bibliometric Hotspots, Research Trends, Conceptual Framework, and Future Directions",
+        "usage_count": 2,
+        "sources": [
+            "Albratty2025.pdf"
+        ]
+    },
+    "bibliometric analysis": {
+        "dyscalculia_relevance": "A method used to analyze scientific literature, providing insights into research trends and hotspots relevant to dyscalculia.",
+        "tag_type": "supportive",
+        "research_source": "Albratty, 2025, Natural Products for Drug Discovery in Cognitive Disabilities: Bibliometric Hotspots, Research Trends, Conceptual Framework, and Future Directions",
+        "usage_count": 2,
+        "sources": [
+            "Albratty2025.pdf"
+        ]
+    },
+    "neuroprotection": {
+        "dyscalculia_relevance": "Refers to strategies or treatments that protect neural function, which could be relevant for cognitive disabilities including dyscalculia.",
+        "tag_type": "supportive",
+        "research_source": "Albratty, 2025, Natural Products for Drug Discovery in Cognitive Disabilities: Bibliometric Hotspots, Research Trends, Conceptual Framework, and Future Directions",
+        "usage_count": 1,
+        "sources": [
+            "Albratty2025.pdf"
+        ]
+    },
+    "emerging trends": {
+        "dyscalculia_relevance": "Indicates new directions or developments in research that may impact the understanding or treatment of dyscalculia.",
+        "tag_type": "supportive",
+        "research_source": "Albratty, 2025, Natural Products for Drug Discovery in Cognitive Disabilities: Bibliometric Hotspots, Research Trends, Conceptual Framework, and Future Directions",
+        "usage_count": 1,
+        "sources": [
+            "Albratty2025.pdf"
+        ]
+    },
+    "Alzheimer’s disease": {
+        "dyscalculia_relevance": "A neurodegenerative disease that involves cognitive decline, providing a broader context for understanding cognitive disabilities.",
+        "tag_type": "supportive",
+        "research_source": "Albratty, 2025, Natural Products for Drug Discovery in Cognitive Disabilities: Bibliometric Hotspots, Research Trends, Conceptual Framework, and Future Directions",
+        "usage_count": 1,
+        "sources": [
+            "Albratty2025.pdf"
+        ]
+    },
+    "human activity recognition": {
+        "dyscalculia_relevance": "Human activity recognition (HAR) provides context for understanding how individuals with dyscalculia interact with their environment, which can be crucial for developing targeted interventions.",
+        "tag_type": "supportive",
+        "research_source": "Alkahtani, 2025, Dual Attention-Based recurrent neural network and Two-Tier optimization algorithm for human activity recognition in individuals with disabilities",
+        "usage_count": 2,
+        "sources": [
+            "Alkahtani2025.pdf"
+        ]
+    },
+    "disabilities": {
+        "dyscalculia_relevance": "Dyscalculia is a specific learning disability in math, making this tag directly relevant as it encompasses the population affected by dyscalculia.",
+        "tag_type": "direct",
+        "research_source": "Alkahtani, 2025, Dual Attention-Based recurrent neural network and Two-Tier optimization algorithm for human activity recognition in individuals with disabilities",
+        "usage_count": 1,
+        "sources": [
+            "Alkahtani2025.pdf"
+        ]
+    },
+    "assistive technology": {
+        "dyscalculia_relevance": "Assistive technology offers methods and tools to help individuals with dyscalculia, making it relevant for supporting those with math learning disabilities.",
+        "tag_type": "supportive",
+        "research_source": "Alkahtani, 2025, Dual Attention-Based recurrent neural network and Two-Tier optimization algorithm for human activity recognition in individuals with disabilities",
+        "usage_count": 2,
+        "sources": [
+            "Alkahtani2025.pdf"
+        ]
+    },
+    "sensor-based HAR": {
+        "dyscalculia_relevance": "Sensor-based HAR can provide detailed data on the activities and behaviors of individuals with dyscalculia, aiding in the development of more effective interventions.",
+        "tag_type": "supportive",
+        "research_source": "Alkahtani, 2025, Dual Attention-Based recurrent neural network and Two-Tier optimization algorithm for human activity recognition in individuals with disabilities",
+        "usage_count": 1,
+        "sources": [
+            "Alkahtani2025.pdf"
+        ]
+    },
+    "cognitive impairments": {
+        "dyscalculia_relevance": "Cognitive impairments can include dyscalculia, a specific learning disability in mathematics, thus providing context to the types of impairments that can be screened or studied.",
+        "tag_type": "supportive",
+        "research_source": "Name, 2025, Early Prediction of Cortical and Subcortical Diseases Using a Novel Screening Test",
+        "usage_count": 1,
+        "sources": [
+            "Ali2025.pdf"
+        ]
+    },
+    "screening test": {
+        "dyscalculia_relevance": "A screening test is a methodology used to identify potential cognitive impairments, including dyscalculia, early on.",
+        "tag_type": "supportive",
+        "research_source": "Name, 2025, Early Prediction of Cortical and Subcortical Diseases Using a Novel Screening Test",
+        "usage_count": 1,
+        "sources": [
+            "Ali2025.pdf"
+        ]
+    },
+    "Alzheimer's disease": {
+        "dyscalculia_relevance": "Alzheimer's disease is a cortical disease that can cause cognitive impairments, providing context to the types of diseases the screening test aims to predict.",
+        "tag_type": "supportive",
+        "research_source": "Name, 2025, Early Prediction of Cortical and Subcortical Diseases Using a Novel Screening Test",
+        "usage_count": 1,
+        "sources": [
+            "Ali2025.pdf"
+        ]
+    },
+    "Parkinson's disease": {
+        "dyscalculia_relevance": "Parkinson's disease is a subcortical disease that can cause cognitive impairments, providing context to the types of diseases the screening test aims to predict.",
+        "tag_type": "supportive",
+        "research_source": "Name, 2025, Early Prediction of Cortical and Subcortical Diseases Using a Novel Screening Test",
+        "usage_count": 1,
+        "sources": [
+            "Ali2025.pdf"
+        ]
+    },
+    "neuropharmacology": {
+        "dyscalculia_relevance": "Neuropharmacology studies the effects of drugs on the nervous system, which can provide insights into the biological underpinnings of dyscalculia and potential pharmacological interventions.",
+        "tag_type": "supportive",
+        "research_source": "specified, 2024, Therapeutic Potential of Natural Products in Cognitive Disabilities: A Bibliometric Analysis",
+        "usage_count": 1,
+        "sources": [
+            "Albratty2025.pdf"
+        ]
+    },
+    "therapeutic innovation": {
+        "dyscalculia_relevance": "Therapeutic innovation refers to new methods or approaches in treatment, which can include novel interventions for cognitive disabilities like dyscalculia.",
+        "tag_type": "supportive",
+        "research_source": "specified, 2024, Therapeutic Potential of Natural Products in Cognitive Disabilities: A Bibliometric Analysis",
+        "usage_count": 1,
+        "sources": [
+            "Albratty2025.pdf"
+        ]
+    },
+    "data normalization": {
+        "dyscalculia_relevance": "",
+        "tag_type": "",
+        "research_source": "",
+        "usage_count": 1,
+        "sources": [
+            "Alkahtani2025.pdf"
+        ]
+    },
+    "feature selection": {
+        "dyscalculia_relevance": "",
+        "tag_type": "",
+        "research_source": "",
+        "usage_count": 1,
+        "sources": [
+            "Alkahtani2025.pdf"
+        ]
+    },
+    "learning disabilities": {
+        "dyscalculia_relevance": "",
+        "tag_type": "",
+        "research_source": "",
+        "usage_count": 1,
+        "sources": [
+            "Alkahtani2025.pdf"
+        ]
+    }
+}

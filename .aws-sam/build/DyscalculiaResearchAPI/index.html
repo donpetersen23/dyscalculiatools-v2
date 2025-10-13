@@ -9,31 +9,213 @@
 <body>
     <header>
         <h1>Dyscalculia Tools</h1>
-        <p>Evidence-based techniques for students with dyscalculia</p>
+        <p>Evidence-Based Techniques for Dyscalculia</p>
+        <div class="auth-buttons">
+            <button id="auth-btn" onclick="showSignup()">Sign In / Sign Up</button>
+            <div id="user-menu" style="display: none;">
+                <span id="username-display"></span>
+                <button onclick="logout()">Logout</button>
+            </div>
+        </div>
     </header>
     <main>
-        <div class="grid">
-            <div class="card">
-                <h3>Visual Number Lines</h3>
-                <p>Help visualize number relationships and operations</p>
+        <section class="welcome">
+            <h2>Building Solutions Together for Dyscalculia</h2>
+            <p>Dyscalculia is as common as dyslexia - yet it's rarely recognized or understood. Many bright kids struggle with math basics while their needs go unmet because teachers and parents don't know what dyscalculia looks like.</p>
+            <p><strong>The challenge:</strong> Unlike dyslexia, dyscalculia lacks awareness, research funding, and proven interventions. Students often feel "bad at math" when they actually have a learning difference that can be supported.</p>
+            <p><strong>Join our growing community:</strong> Whether you're discovering strategies in your classroom, researching new approaches, supporting a child at home, or improving your own abilities - your experience matters in changing this.</p>
+            <p><strong>Together we can:</strong> Raise awareness, share proven techniques, and build the resources that students with dyscalculia truly deserve.</p>
+            <p><em>Join us in making mathematics accessible for all.</em></p>
+        </section>
+        
+        <section class="action-buttons">
+            <button class="primary-btn" onclick="showTools()">Tools & Strategies</button>
+            <button class="secondary-btn" onclick="showResearch()">Research & Evidence</button>
+        </section>
+        
+        <div class="content-container">
+            <div id="tools-section" class="content-section">
+                <h2>Find Solutions for Your Biggest Challenges</h2>
+                <div class="grid">
+                    <div class="card problem-card">
+                        <h3>"My child can't memorize math facts"</h3>
+                        <p>Multiplication tables, addition facts, and division - strategies that work when rote memorization doesn't</p>
+                        <a href="array-tool.html" class="tool-link">Try Visual Array Tool</a>
+                    </div>
+                    <div class="card problem-card">
+                        <h3>"Math anxiety is taking over"</h3>
+                        <p>When math becomes emotionally overwhelming - building confidence and reducing fear</p>
+                        <span class="coming-soon">Tools coming soon</span>
+                    </div>
+                    <div class="card problem-card">
+                        <h3>"They think they're 'bad at math'"</h3>
+                        <p>Protecting self-esteem and identity while building real math skills</p>
+                        <span class="coming-soon">Tools coming soon</span>
+                    </div>
+                    <div class="card problem-card">
+                        <h3>"Word problems are impossible"</h3>
+                        <p>Breaking down language barriers that hide math understanding</p>
+                        <span class="coming-soon">Tools coming soon</span>
+                    </div>
+                    <div class="card problem-card">
+                        <h3>"Basic number sense is missing"</h3>
+                        <p>Building foundational understanding of quantities, place value, and number relationships</p>
+                        <span class="coming-soon">Tools coming soon</span>
+                    </div>
+                </div>
             </div>
-            <div class="card">
-                <h3>Manipulatives</h3>
-                <p>Make abstract concepts concrete with hands-on tools</p>
+            
+            <div id="research-section" class="content-section" style="display: none;">
+                <h2>Search Dyscalculia Research</h2>
+                <p style="text-align: center; margin-bottom: 2rem; color: #666;">Explore our curated database of research studies specifically relevant to dyscalculia</p>
+                
+                <div class="search-container">
+                    <input type="text" id="research-search" placeholder="Search for interventions, strategies, or topics..." />
+                    <button id="search-btn" onclick="searchResearch()">Search</button>
+                </div>
+                
+                <div class="research-tags">
+                    <h3>Browse by Topic:</h3>
+                    <div class="tag-buttons">
+                        <button class="tag-btn" onclick="quickSearch('multiplication facts')">Multiplication Facts</button>
+                        <button class="tag-btn" onclick="quickSearch('number sense')">Number Sense</button>
+                        <button class="tag-btn" onclick="quickSearch('math anxiety')">Math Anxiety</button>
+                        <button class="tag-btn" onclick="quickSearch('visual strategies')">Visual Strategies</button>
+                        <button class="tag-btn" onclick="quickSearch('working memory')">Working Memory</button>
+                        <button class="tag-btn" onclick="quickSearch('interventions')">Interventions</button>
+                    </div>
+                </div>
+                
+                <div id="search-results" class="search-results"></div>
             </div>
-            <div class="card">
-                <h3>Step-by-Step Breakdown</h3>
-                <p>Break complex problems into manageable steps</p>
+        </div>
+        
+        <!-- Login Modal -->
+        <div id="login-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('login-modal')">&times;</span>
+                <h2>Login</h2>
+                <form id="login-form">
+                    <input type="email" placeholder="Email" required>
+                    <input type="password" placeholder="Password" required>
+                    <button type="submit">Login</button>
+                </form>
+                <p>Don't have an account? <a href="#" onclick="closeModal('login-modal'); showSignup();">Sign up</a></p>
             </div>
-            <div class="card">
-                <h3>Multi-Sensory Learning</h3>
-                <p>Combine visual, auditory, and kinesthetic approaches</p>
-            </div>
-            <div class="card">
-                <h3><a href="/research" style="color: inherit; text-decoration: none;">Research Assistant</a></h3>
-                <p>Find evidence-based research for your interventions</p>
+        </div>
+        
+        <!-- Signup Modal -->
+        <div id="signup-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('signup-modal')">&times;</span>
+                <h2>Join the Community</h2>
+                <form id="signup-form">
+                    <input type="text" placeholder="Name" required>
+                    <input type="email" placeholder="Email" required>
+                    <select required>
+                        <option value="">I am a...</option>
+                        <option value="parent">Parent</option>
+                        <option value="teacher">Teacher</option>
+                        <option value="tutor">Tutor</option>
+                        <option value="researcher">Researcher</option>
+                        <option value="individual">Individual with dyscalculia</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <input type="password" placeholder="Password" required>
+                    <button type="submit">Join Community</button>
+                </form>
+                <p>Already have an account? <a href="#" onclick="closeModal('signup-modal'); showLogin();">Login</a></p>
             </div>
         </div>
     </main>
+    <script>
+        function showTools() {
+            document.getElementById('tools-section').style.display = 'block';
+            document.getElementById('research-section').style.display = 'none';
+            document.querySelector('.primary-btn').classList.add('active');
+            document.querySelector('.secondary-btn').classList.remove('active');
+        }
+        
+        function showResearch() {
+            document.getElementById('tools-section').style.display = 'none';
+            document.getElementById('research-section').style.display = 'block';
+            document.querySelector('.secondary-btn').classList.add('active');
+            document.querySelector('.primary-btn').classList.remove('active');
+        }
+        
+        // Show tools by default
+        document.addEventListener('DOMContentLoaded', function() {
+            showTools();
+        });
+        
+        function searchResearch() {
+            const query = document.getElementById('research-search').value;
+            if (!query.trim()) return;
+            
+            fetch('/api/search', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({query: query})
+            })
+            .then(response => response.json())
+            .then(data => displayResults(data))
+            .catch(error => console.error('Search error:', error));
+        }
+        
+        function quickSearch(query) {
+            document.getElementById('research-search').value = query;
+            searchResearch();
+        }
+        
+        function displayResults(data) {
+            const resultsDiv = document.getElementById('search-results');
+            
+            if (data.results && data.results.length > 0) {
+                const studyWord = data.total_found === 1 ? 'study' : 'studies';
+                let html = `<h3>Found ${data.total_found} ${studyWord} for "${data.query}"</h3>`;
+                
+                data.results.forEach(study => {
+                    html += `
+                        <div class="study-result">
+                            <h4>${study.title}</h4>
+                            <p><strong>Authors:</strong> ${study.authors.join(', ')}</p>
+                            <p><strong>Year:</strong> ${study.year} | <strong>Relevance Score:</strong> ${study.relevance_score}/10</p>
+                            <p><strong>Summary:</strong> ${study.summary}</p>
+                            <p><strong>Dyscalculia Relevance:</strong> ${study.dyscalculia_relevance}</p>
+                        </div>
+                    `;
+                });
+                
+                resultsDiv.innerHTML = html;
+            } else {
+                resultsDiv.innerHTML = `<p>No studies found for "${data.query}". Try different keywords.</p>`;
+            }
+        }
+        
+        // Allow Enter key to search
+        document.getElementById('research-search').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchResearch();
+            }
+        });
+        
+        function showLogin() {
+            document.getElementById('login-modal').style.display = 'block';
+        }
+        
+        function showSignup() {
+            document.getElementById('signup-modal').style.display = 'block';
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+        
+        function logout() {
+            localStorage.removeItem('user');
+            document.getElementById('user-menu').style.display = 'none';
+            document.getElementById('auth-btn').style.display = 'inline-block';
+        }
+    </script>
 </body>
 </html>

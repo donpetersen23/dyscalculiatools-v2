@@ -1,0 +1,104 @@
+[
+  {
+    "title": "Skip Counting with Visual Patterns",
+    "description": "Use visual patterns and rhythmic counting to help students learn multiplication facts through skip counting.",
+    "age_range": "6-12 years",
+    "setting": "Individual or small group",
+    "time_required": "15-20 minutes",
+    "materials": "Colored blocks, number line, rhythm instruments",
+    "steps": [
+      "Start with concrete objects (blocks) arranged in equal groups",
+      "Count by the target number while pointing to each group",
+      "Add rhythm or music to make it memorable",
+      "Practice with visual number line",
+      "Gradually remove visual supports"
+    ],
+    "tags": ["Multiplication Facts", "Number Sense", "Visual Learning"],
+    "challenges": ["multiplication", "skip counting", "number patterns"]
+  },
+  {
+    "title": "Math Anxiety Breathing Technique",
+    "description": "A simple breathing exercise to help students manage math anxiety before and during math tasks.",
+    "age_range": "8+ years",
+    "setting": "Any setting",
+    "time_required": "2-5 minutes",
+    "materials": "None required",
+    "steps": [
+      "Teach the 4-7-8 breathing pattern",
+      "Inhale for 4 counts",
+      "Hold breath for 7 counts",
+      "Exhale slowly for 8 counts",
+      "Repeat 3-4 times before math work"
+    ],
+    "tags": ["Math Anxiety", "Self-Regulation", "Coping Strategies"],
+    "challenges": ["anxiety", "stress", "emotional regulation"]
+  },
+  {
+    "title": "Fraction Pizza Method",
+    "description": "Use pizza slices to make fractions concrete and relatable for students with dyscalculia.",
+    "age_range": "8-14 years",
+    "setting": "Individual or small group",
+    "time_required": "20-30 minutes",
+    "materials": "Paper plates, colored paper, scissors",
+    "steps": [
+      "Create paper plate 'pizzas'",
+      "Cut colored paper into pizza slice shapes",
+      "Practice making different fractions",
+      "Compare fraction sizes visually",
+      "Connect to real-world pizza sharing"
+    ],
+    "tags": ["Fractions", "Visual Learning", "Concrete Manipulation"],
+    "challenges": ["fractions", "part-whole relationships", "comparison"]
+  },
+  {
+    "title": "Word Problem Strategy Cards",
+    "description": "Step-by-step visual cards to help students break down and solve word problems systematically.",
+    "age_range": "9-16 years",
+    "setting": "Individual or classroom",
+    "time_required": "Variable",
+    "materials": "Strategy cards, highlighters, paper",
+    "steps": [
+      "Read the problem twice",
+      "Highlight key information",
+      "Identify what the question is asking",
+      "Choose the operation needed",
+      "Solve and check the answer"
+    ],
+    "tags": ["Word Problems", "Problem Solving", "Reading Comprehension"],
+    "challenges": ["word problems", "reading comprehension", "problem solving"]
+  },
+  {
+    "title": "Number Line Jumping",
+    "description": "Physical movement combined with number line work to reinforce number sense and operations.",
+    "age_range": "5-10 years",
+    "setting": "Classroom or home",
+    "time_required": "10-15 minutes",
+    "materials": "Floor number line or tape, markers",
+    "steps": [
+      "Create a large number line on the floor",
+      "Have student physically jump to numbers",
+      "Practice addition by jumping forward",
+      "Practice subtraction by jumping backward",
+      "Connect movement to abstract concepts"
+    ],
+    "tags": ["Number Sense", "Kinesthetic Learning", "Addition", "Subtraction"],
+    "challenges": ["number sense", "addition", "subtraction", "spatial awareness"]
+  },
+  {
+    "title": "Success Journal for Math",
+    "description": "A daily practice to build math confidence by recording small wins and progress.",
+    "age_range": "8+ years",
+    "setting": "Individual",
+    "time_required": "5 minutes daily",
+    "materials": "Journal, pen",
+    "steps": [
+      "Write one thing learned in math today",
+      "Record one problem solved successfully",
+      "Note any strategies that helped",
+      "Write one positive math thought",
+      "Review weekly to see progress"
+    ],
+    "tags": ["Self-Esteem", "Growth Mindset", "Reflection"],
+    "challenges": ["confidence", "self-esteem", "motivation"]
+  }
+]

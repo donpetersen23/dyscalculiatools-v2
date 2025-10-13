@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Tool - Dyscalculia Tools</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .controls {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .control-group {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .control-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select, button {
+            padding: 8px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 10px 20px;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        .array-container {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+        }
+        .array {
+            display: grid;
+            gap: 2px;
+            background: #333;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .cell {
+            width: 40px;
+            height: 40px;
+            background: #e3f2fd;
+            border: 2px solid #2196f3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .cell:hover {
+            background: #bbdefb;
+            transform: scale(1.1);
+        }
+        .cell.selected {
+            background: #4CAF50;
+            color: white;
+        }
+        .equation {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 20px 0;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .mode-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .mode-btn {
+            padding: 10px 20px;
+            background: #2196f3;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .mode-btn.active {
+            background: #4CAF50;
+        }
+        .instructions {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Visual Array Tool</h1>
+        <p>Learn multiplication and division using visual arrays</p>
+    </div>
+
+    <div class="instructions" id="instructions">
+        Click on array cells to count and see the math facts!
+    </div>
+
+    <div class="mode-buttons">
+        <button class="mode-btn active" onclick="setMode('multiplication')">Multiplication</button>
+        <button class="mode-btn" onclick="setMode('division')">Division</button>
+    </div>
+
+    <div class="controls">
+        <div class="control-group">
+            <label for="rows">Rows:</label>
+            <input type="number" id="rows" min="1" max="12" value="3">
+        </div>
+        <div class="control-group">
+            <label for="cols">Columns:</label>
+            <input type="number" id="cols" min="1" max="12" value="4">
+        </div>
+        <div class="control-group">
+            <button onclick="createArray()">Create Array</button>
+            <button onclick="clearSelection()">Clear</button>
+        </div>
+    </div>
+
+    <div class="array-container">
+        <div id="array" class="array"></div>
+    </div>
+
+    <div class="equation" id="equation">
+        3 × 4 = 12
+    </div>
+
+    <script>
+        let currentMode = 'multiplication';
+        let selectedCells = 0;
+        let totalCells = 0;
+        let rows = 3;
+        let cols = 4;
+
+        function setMode(mode) {
+            currentMode = mode;
+            document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            if (mode === 'multiplication') {
+                document.getElementById('instructions').textContent = 'Click on array cells to count and see multiplication facts!';
+            } else {
+                document.getElementById('instructions').textContent = 'Click on array cells to explore division! See how groups can be divided.';
+            }
+            
+            updateEquation();
+        }
+
+        function createArray() {
+            rows = parseInt(document.getElementById('rows').value);
+            cols = parseInt(document.getElementById('cols').value);
+            totalCells = rows * cols;
+            selectedCells = 0;
+            
+            const arrayDiv = document.getElementById('array');
+            arrayDiv.innerHTML = '';
+            arrayDiv.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+            arrayDiv.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
+            
+            for (let i = 0; i < totalCells; i++) {
+                const cell = document.createElement('div');
+                cell.className = 'cell';
+                cell.textContent = i + 1;
+                cell.onclick = () => toggleCell(cell, i);
+                arrayDiv.appendChild(cell);
+            }
+            
+            updateEquation();
+        }
+
+        function toggleCell(cell, index) {
+            if (cell.classList.contains('selected')) {
+                cell.classList.remove('selected');
+                selectedCells--;
+            } else {
+                cell.classList.add('selected');
+                selectedCells++;
+            }
+            updateEquation();
+        }
+
+        function clearSelection() {
+            document.querySelectorAll('.cell').forEach(cell => {
+                cell.classList.remove('selected');
+            });
+            selectedCells = 0;
+            updateEquation();
+        }
+
+        function updateEquation() {
+            const equationDiv = document.getElementById('equation');
+            
+            if (currentMode === 'multiplication') {
+                if (selectedCells === 0) {
+                    equationDiv.innerHTML = `${rows} × ${cols} = ${totalCells}<br><small>Total cells in array</small>`;
+                } else {
+                    equationDiv.innerHTML = `Selected: ${selectedCells} cells<br><small>${rows} × ${cols} = ${totalCells} total</small>`;
+                }
+            } else {
+                if (selectedCells === 0) {
+                    equationDiv.innerHTML = `${totalCells} ÷ ${rows} = ${cols}<br><small>OR ${totalCells} ÷ ${cols} = ${rows}</small>`;
+                } else {
+                    const remainingCells = totalCells - selectedCells;
+                    equationDiv.innerHTML = `${selectedCells} selected, ${remainingCells} remaining<br><small>Exploring division of ${totalCells}</small>`;
+                }
+            }
+        }
+
+        // Initialize the array
+        createArray();
+
+        // Update array when inputs change
+        document.getElementById('rows').addEventListener('input', createArray);
+        document.getElementById('cols').addEventListener('input', createArray);
+    </script>
+</body>
+</html>

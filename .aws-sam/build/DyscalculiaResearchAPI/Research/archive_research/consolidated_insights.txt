@@ -1,0 +1,94 @@
+================================================================================
+CONSOLIDATED DYSCALCULIA RESEARCH INSIGHTS
+================================================================================
+
+🔍 DEFINITIONS & CHARACTERISTICS:
+--------------------------------------------------
+• Dyscalculia is a very heterogeneous disorder. (Source: PMC12503033)
+• dyscalculia is mentioned as an alternative term for a pattern of 
+difficulties in mathematics. (Source: PMC12503033)
+
+🧬 CAUSES & RISK FACTORS:
+--------------------------------------------------
+• risk factors
+forADHDsymptomsandarithmeticability. (Source: PMC12231410)
+• risk factors could include obesity, depression, 
+smoking, hearing loss, and social isolation. (Source: PMC12267627)
+
+⚠️ SYMPTOMS & MANIFESTATIONS:
+--------------------------------------------------
+• characterized by straightforward 
+tasks, such as dot counting and the comparison of magnitudes ( Reeve 
+et  al. (Source: PMC12503033)
+• characterized by multiple 
+smaller deficits across various areas. (Source: PMC12503033)
+• characterized by a signi ﬁcant
+decrease in the TD group ( t(19) =−2. (Source: PMC12350621)
+• characterized by relative increases in
+cross-format NRS in the MD group and relative decreases in cross-format NRS in the
+TD group in observed brain regions. (Source: PMC12350621)
+• difficulty with dyscalculia and ADHD by a pediatric clinic specializing 
+in neurodevelopment and behavioural disorders. (Source: PMC12488995)
+
+📋 ASSESSMENT & DIAGNOSIS:
+--------------------------------------------------
+• assessment of reading fluency requires a certain level of reading 
+comprehension and basic knowledge of everyday facts. (Source: PMC12503033)
+• diagnosis of mathematical learning disorders 
+(Arbeitsgemeinschaft der Wissenschaftlichen Medizinischen 
+Fachgesellschaften, 2018 ). (Source: PMC12503033)
+• diagnosis of mathematical 
+learning disorders ( Arbeitsgemeinschaft der Wissenschaftlichen 
+Medizinischen Fachgesellschaften, 2018 ). (Source: PMC12503033)
+• Screening (SLS 1–4) was used to assess 
+reading fluency ( Mayringer and Wimmer, 2003 ): the test with a 
+parallel test reliability of at least 0. (Source: PMC12503033)
+• assessmentswereprimarilybasedonstudents’academic
+performance in school, which fails to provide a quantita-
+tiveassessmentofarithmeticskill. (Source: PMC12231410)
+
+🎯 INTERVENTIONS & TREATMENTS:
+--------------------------------------------------
+• treatment,educationaltraining,andspe-
+cializedinterventions[ 3,4]. (Source: PMC12231410)
+• treatment
+goals and improving potential long-term social and devel-
+opmentaloutcomes. (Source: PMC12231410)
+• training,andspe-
+cializedinterventions[ 3,4]. (Source: PMC12231410)
+• training in language and reading skills. (Source: PMC12231410)
+• training, data consistency, and long-term engagement. (Source: PMC12241927)
+• training, data collection, andsustaining student engagement over two years. (Source: PMC12241927)
+• interventions to support children with MD through targeted,evidence-based strategies. (Source: PMC12350621)
+• intervention s designed to improve numerical ﬂuency are
+not speci ﬁcally tailored to meet the needs of children with MD16–22. (Source: PMC12350621)
+
+📈 RESEARCH OUTCOMES:
+--------------------------------------------------
+• significant deficits in mathematical skills and 
+included disproportionately many children with dyscalculia. (Source: PMC12503033)
+• significant mathematical deficits (=the low-achieving profile). (Source: PMC12503033)
+• significant
+differences,someelementsoftheexecutivefunctionscould
+betheetiologicalfactorsforthecomorbidityandcoulddis-
+tinguishADHD+DDfromADHD-DD. (Source: PMC12231410)
+• significant
+differences in both IQ test scores (ADHD+DD <ADHD-
+DD<NC,all p<0. (Source: PMC12231410)
+• effectively differentiate students
+with dyscalculia from their typically developing peers
+across different grades. (Source: PMC12231410)
+• results showed minimal differences in BRIEF scores
+betweentheADHD+DDgroupandADHD-DDgroup( post
+hoc comparison : all p>0. (Source: PMC12231410)
+
+💡 KEY RESEARCH FINDINGS:
+--------------------------------------------------
+• Dyscalculia is a very heterogeneous disorder. This is illustrated by the fact that numerous possible subtypes have been described in previous studies. Therefore, the present study addresses the questi... (Source: PMC12503033)
+• This study aimed to elucidate the characteristics of executive function deficits in children with Attention-deficit/hyperactivity disorder (ADHD) comorbid with developmental dyscalculia (ADHD+DD). Thr... (Source: PMC12231410)
+• In the adult brain, hemodynamic responses to visually presented numerosities reveal receptive field-like tuning curves in topographically organized maps across association cortices. It is currently un... (Source: PMC12308021)
+•   A Four-session workshop was held at Terra Santa College in Bethlehem from December 2024 to January 2025, provided by a speech therapist and a psychiatry resident, with the support of Pro Terra Sanct... (Source: PMC12241927)
+• Children with mathematical difficulties (MD) often struggle to connect abstract numerical symbols with corresponding nonsymbolic quantities, a foundational skill for mathematical development. We evalu... (Source: PMC12350621)
+• Many animal species can approximately judge the number of objects in a visual scene at a single glance, and humans can further determine the exact cardinality of a set by deploying systematic counting... (Source: PMC12431670)
+• Rapidly evolving scientific, technological and societal advancements depend on those who are accomplished in mathematics, so uncovering the underpinnings of maths performance remains a valuable topic ... (Source: PMC12484368)
+• Mathematics anxiety is a persistent barrier to effective learning, particularly in primary education. Understanding how this phenomenon has evolved in academic literature can help guide educational st... (Source: PMC12369395)

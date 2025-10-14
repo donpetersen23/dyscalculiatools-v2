@@ -136,8 +136,9 @@
             document.querySelector('.primary-btn').classList.remove('active');
         }
         
-        // Tools search functionality
+        // Tools and research search functionality
         let toolsData = [];
+        let researchData = [];
         
         // Load tools data
         fetch('tools_data.json')
@@ -146,6 +147,14 @@
                 toolsData = data;
             })
             .catch(error => console.error('Error loading tools data:', error));
+        
+        // Load research metadata
+        fetch('research_metadata.json')
+            .then(response => response.json())
+            .then(data => {
+                researchData = data;
+            })
+            .catch(error => console.error('Error loading research data:', error));
         
         function searchTools() {
             const query = document.getElementById('tools-search').value.toLowerCase();
@@ -209,22 +218,31 @@
         }
         
         function searchResearch() {
-            const query = document.getElementById('research-search').value;
-            if (!query.trim()) return;
+            const query = document.getElementById('research-search').value.toLowerCase();
+            if (!query.trim()) {
+                document.getElementById('search-results').innerHTML = '';
+                return;
+            }
             
-            fetch('/api/search', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({query: query})
-            })
-            .then(response => response.json())
-            .then(data => displayResults(data))
-            .catch(error => console.error('Search error:', error));
+            const results = researchData.filter(item => 
+                item.title.toLowerCase().includes(query) ||
+                item.authors.toLowerCase().includes(query) ||
+                item.summary.toLowerCase().includes(query) ||
+                item.tags.some(tag => tag.toLowerCase().includes(query)) ||
+                (item.keywords && item.keywords.some(keyword => keyword.toLowerCase().includes(query)))
+            );
+            
+            displayResults(results);
         }
         
         function quickSearch(query) {
             document.getElementById('research-search').value = query;
-            searchResearch();
+            const results = researchData.filter(item => 
+                item.title.toLowerCase().includes(query.toLowerCase()) ||
+                item.tags.some(tag => tag.toLowerCase().includes(query.toLowerCase())) ||
+                (item.keywords && item.keywords.some(keyword => keyword.toLowerCase().includes(query.toLowerCase())))
+            );
+            displayResults(results);
         }
         
         function displayResults(data) {

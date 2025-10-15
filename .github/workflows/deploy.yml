@@ -37,6 +37,7 @@ jobs:
           aws s3 cp styles.css s3://dyscalculia-tools-187249759/
           aws s3 cp tools_data.json s3://dyscalculia-tools-187249759/
           aws s3 cp research_metadata.json s3://dyscalculia-tools-187249759/
+          aws s3 cp favicon.png s3://dyscalculia-tools-187249759/
       
       - name: Invalidate CloudFront
         run: aws cloudfront create-invalidation --distribution-id EMANNVI38BDCI --paths "/*"

@@ -65,12 +65,10 @@ footer nav a:hover { text-decoration: underline; }
     font-size: 1.1rem;
     cursor: pointer;
     transition: var(--transition-normal);
-    vertical-align: middle;
-    display: inline-block;
 }
-.primary-btn:hover, .primary-btn.active { background: var(--color-primary-dark); transform: translateY(-2px); }
+.primary-btn:hover { background: var(--color-primary-dark); }
 .secondary-btn { 
-    background: var(--color-success); 
+    background: var(--color-primary); 
     color: white; 
     padding: var(--spacing-sm) var(--spacing-lg);
     border: none;
@@ -78,10 +76,8 @@ footer nav a:hover { text-decoration: underline; }
     font-size: 1.1rem;
     cursor: pointer;
     transition: var(--transition-normal);
-    vertical-align: middle;
-    display: inline-block;
 }
-.secondary-btn:hover, .secondary-btn.active { background: var(--color-success-dark); transform: translateY(-2px); }
+.secondary-btn:hover { background: var(--color-primary-dark); }
 
 /* ===== Cards ===== */
 .card {

@@ -24,21 +24,21 @@ jobs:
         run: |
           pip install aws-sam-cli
       
-      - name: Deploy Lambda with SAM
+      - name: Deploy Lambda with templates
         run: |
-          # Verify required files exist
-          ls -la tools_data.json research_metadata.json templates/
           sam build
           sam deploy --no-confirm-changeset --no-fail-on-empty-changeset
       
       - name: Deploy static assets to S3
         run: |
-          aws s3 cp styles.css s3://dyscalculia-tools-187249759/
-          aws s3 cp tools_data.json s3://dyscalculia-tools-187249759/
-          aws s3 cp research_metadata.json s3://dyscalculia-tools-187249759/
-          aws s3 cp favicon.ico s3://dyscalculia-tools-187249759/
-          aws s3 cp favicon-32x32.png s3://dyscalculia-tools-187249759/
-          aws s3 cp apple-touch-icon.png s3://dyscalculia-tools-187249759/
+          aws s3 sync . s3://dyscalculia-tools-187249759/ \
+            --exclude "*" \
+            --include "styles.css" \
+            --include "tools_data.json" \
+            --include "research_metadata.json" \
+            --include "*.ico" \
+            --include "*.png" \
+            --cache-control "max-age=86400"
       
       - name: Invalidate CloudFront
         run: aws cloudfront create-invalidation --distribution-id EMANNVI38BDCI --paths "/*"

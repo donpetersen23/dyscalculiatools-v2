@@ -1,58 +1,45 @@
 @echo off
-REM Deployment script for Dyscalculia Tools
+echo ========================================
+echo Building and Deploying Dyscalculia Tools
+echo ========================================
 
-echo ====================================
-echo Dyscalculia Tools Deployment Script
-echo ====================================
 echo.
-
-REM Configuration - UPDATE THESE VALUES
-set FUNCTION_NAME=dyscalculia-tools
-set S3_BUCKET=your-bucket-name
-set CDN_URL=https://your-cloudfront-domain.cloudfront.net
-set AWS_REGION=us-east-1
-
-echo Step 1: Creating Lambda deployment package...
-cd lambda
-powershell -Command "Compress-Archive -Path lambda_function.py -DestinationPath lambda.zip -Force"
-echo Lambda package created.
-echo.
-
-echo Step 2: Deploying Lambda function...
-aws lambda update-function-code --function-name %FUNCTION_NAME% --zip-file fileb://lambda.zip --region %AWS_REGION%
-if %errorlevel% neq 0 (
-    echo Lambda function not found. Creating new function...
-    aws lambda create-function ^
-        --function-name %FUNCTION_NAME% ^
-        --runtime python3.9 ^
-        --role arn:aws:iam::YOUR_ACCOUNT_ID:role/lambda-execution-role ^
-        --handler lambda_function.lambda_handler ^
-        --zip-file fileb://lambda.zip ^
-        --timeout 10 ^
-        --memory-size 256 ^
-        --environment Variables={CDN_URL=%CDN_URL%} ^
-        --region %AWS_REGION%
+echo [1/4] Building HTML files from components...
+python build.py
+if errorlevel 1 (
+    echo ERROR: Build failed
+    exit /b 1
 )
-echo.
 
-echo Step 3: Updating Lambda environment variables...
-aws lambda update-function-configuration --function-name %FUNCTION_NAME% --environment Variables={CDN_URL=%CDN_URL%} --region %AWS_REGION%
 echo.
+echo [2/4] Deploying Lambda function...
+call sam build
+call sam deploy --no-confirm-changeset
+if errorlevel 1 (
+    echo ERROR: Lambda deployment failed
+    exit /b 1
+)
 
-cd ..
+echo.
+echo [3/4] Uploading static files to S3...
+aws s3 sync . s3://dyscalculiatools.com-website ^
+    --exclude "*" ^
+    --include "index.html" ^
+    --include "about.html" ^
+    --include "styles.css" ^
+    --include "*.json" ^
+    --include "*.png" ^
+    --include "*.ico" ^
+    --cache-control "max-age=300"
 
-echo Step 4: Uploading static files to S3...
-aws s3 cp cloudfront/common.js s3://%S3_BUCKET%/common.js
-aws s3 cp cloudfront/home.js s3://%S3_BUCKET%/home.js
-echo Static files uploaded.
 echo.
+echo [4/4] Invalidating CloudFront cache...
+for /f "tokens=*" %%i in ('aws cloudformation describe-stacks --stack-name dyscalculiatools --query "Stacks[0].Outputs[?OutputKey=='CloudFrontDistributionId'].OutputValue" --output text') do set DIST_ID=%%i
+aws cloudfront create-invalidation --distribution-id %DIST_ID% --paths "/*"
 
-echo ====================================
-echo Deployment Complete!
-echo ====================================
 echo.
-echo Next steps:
-echo 1. Configure API Gateway routes (/, /{proxy+})
-echo 2. Test your endpoints
+echo ========================================
+echo ✅ Deployment Complete!
+echo ========================================
 echo.
-pause
+echo Your site is live at: https://dyscalculiatools.com

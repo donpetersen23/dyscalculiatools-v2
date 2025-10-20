@@ -190,10 +190,18 @@ def handle_tool_page(event):
         }
 
 def handle_homepage(event):
-    """Generate homepage from template"""
+    """Generate homepage from components"""
     try:
-        with open('templates/homepage.html', 'r') as f:
-            html = f.read()
+        with open('templates/base.html', 'r') as f:
+            base = f.read()
+        with open('templates/home-content.html', 'r') as f:
+            content = f.read()
+        with open('templates/home-scripts.html', 'r') as f:
+            scripts = f.read()
+        
+        html = base.replace('{{title}}', 'Home')
+        html = html.replace('{{content}}', content)
+        html = html.replace('{{scripts}}', scripts)
         
         return {
             'statusCode': 200,
@@ -210,10 +218,18 @@ def handle_homepage(event):
         }
 
 def handle_about_page(event):
-    """Generate about page from template"""
+    """Generate about page from components"""
     try:
-        with open('templates/about.html', 'r') as f:
-            html = f.read()
+        with open('templates/base.html', 'r') as f:
+            base = f.read()
+        with open('templates/about-content.html', 'r') as f:
+            content = f.read()
+        with open('templates/about-scripts.html', 'r') as f:
+            scripts = f.read()
+        
+        html = base.replace('{{title}}', 'About')
+        html = html.replace('{{content}}', content)
+        html = html.replace('{{scripts}}', scripts)
         
         return {
             'statusCode': 200,

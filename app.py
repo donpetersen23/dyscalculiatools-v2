@@ -41,13 +41,31 @@ def favicon():
 # Page routes using templates
 @app.route('/')
 def home():
-    with open('templates/homepage.html', 'r', encoding='utf-8') as f:
-        return f.read()
+    with open('templates/base.html', 'r', encoding='utf-8') as f:
+        base = f.read()
+    with open('templates/home-content.html', 'r', encoding='utf-8') as f:
+        content = f.read()
+    with open('templates/home-scripts.html', 'r', encoding='utf-8') as f:
+        scripts = f.read()
+    
+    html = base.replace('{{title}}', 'Home')
+    html = html.replace('{{content}}', content)
+    html = html.replace('{{scripts}}', scripts)
+    return html
 
 @app.route('/about')
 def about():
-    with open('templates/about.html', 'r', encoding='utf-8') as f:
-        return f.read()
+    with open('templates/base.html', 'r', encoding='utf-8') as f:
+        base = f.read()
+    with open('templates/about-content.html', 'r', encoding='utf-8') as f:
+        content = f.read()
+    with open('templates/about-scripts.html', 'r', encoding='utf-8') as f:
+        scripts = f.read()
+    
+    html = base.replace('{{title}}', 'About')
+    html = html.replace('{{content}}', content)
+    html = html.replace('{{scripts}}', scripts)
+    return html
 
 @app.route('/tool/<tool_id>')
 def tool_page(tool_id):

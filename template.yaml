@@ -1,6 +1,15 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: Dyscalculia Research Assistant Serverless API
+Description: Dyscalculia Research Assistant with Custom Domain
+
+Parameters:
+  DomainName:
+    Type: String
+    Default: dyscalculiatools.com
+    Description: The custom domain name
+  CertificateArn:
+    Type: String
+    Description: ARN of the ACM certificate for the domain (must be in us-east-1)
 
 Globals:
   Function:
@@ -8,6 +17,94 @@ Globals:
     MemorySize: 512
 
 Resources:
+  # S3 Bucket for static website hosting
+  WebsiteBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub "${DomainName}-website"
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: index.html
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: false
+        BlockPublicPolicy: false
+        IgnorePublicAcls: false
+        RestrictPublicBuckets: false
+
+  # S3 Bucket Policy for public read access
+  WebsiteBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref WebsiteBucket
+      PolicyDocument:
+        Statement:
+          - Sid: PublicReadGetObject
+            Effect: Allow
+            Principal: '*'
+            Action: s3:GetObject
+            Resource: !Sub "${WebsiteBucket}/*"
+
+  # CloudFront Origin Access Control
+  OriginAccessControl:
+    Type: AWS::CloudFront::OriginAccessControl
+    Properties:
+      OriginAccessControlConfig:
+        Name: !Sub "${DomainName}-OAC"
+        OriginAccessControlOriginType: s3
+        SigningBehavior: always
+        SigningProtocol: sigv4
+
+  # CloudFront Distribution
+  CloudFrontDistribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Aliases:
+          - !Ref DomainName
+          - !Sub "www.${DomainName}"
+        DefaultCacheBehavior:
+          TargetOriginId: APIOrigin
+          ViewerProtocolPolicy: redirect-to-https
+          CachePolicyId: 4135ea2d-6df8-44a3-9df3-4b5a84be39ad  # Managed-CachingDisabled
+          OriginRequestPolicyId: b689b0a8-53d0-40ab-baf2-68738e2966ac  # Managed-AllViewerExceptHostHeader
+        CacheBehaviors:
+          - PathPattern: "/styles.css"
+            TargetOriginId: S3Origin
+            ViewerProtocolPolicy: redirect-to-https
+            CachePolicyId: 658327ea-f89d-4fab-a63d-7e88639e58f6  # Managed-CachingOptimized
+          - PathPattern: "/*.json"
+            TargetOriginId: S3Origin
+            ViewerProtocolPolicy: redirect-to-https
+            CachePolicyId: 658327ea-f89d-4fab-a63d-7e88639e58f6  # Managed-CachingOptimized
+          - PathPattern: "/*.ico"
+            TargetOriginId: S3Origin
+            ViewerProtocolPolicy: redirect-to-https
+            CachePolicyId: 658327ea-f89d-4fab-a63d-7e88639e58f6  # Managed-CachingOptimized
+          - PathPattern: "/*.png"
+            TargetOriginId: S3Origin
+            ViewerProtocolPolicy: redirect-to-https
+            CachePolicyId: 658327ea-f89d-4fab-a63d-7e88639e58f6  # Managed-CachingOptimized
+        Origins:
+          - Id: S3Origin
+            DomainName: !GetAtt WebsiteBucket.RegionalDomainName
+            S3OriginConfig:
+              OriginAccessIdentity: ''
+            OriginAccessControlId: !Ref OriginAccessControl
+          - Id: APIOrigin
+            DomainName: !Sub "${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com"
+            CustomOriginConfig:
+              HTTPPort: 443
+              OriginProtocolPolicy: https-only
+            OriginPath: /Prod
+        Enabled: true
+        # DefaultRootObject: index.html  # Not needed - Lambda handles all routes
+        ViewerCertificate:
+          AcmCertificateArn: !Ref CertificateArn
+          SslSupportMethod: sni-only
+          MinimumProtocolVersion: TLSv1.2_2021
+        # CustomErrorResponses not needed - Lambda handles all routes
+
+  # Lambda function for backend API
   DyscalculiaResearchAPI:
     Type: AWS::Serverless::Function
     Properties:
@@ -18,6 +115,22 @@ Resources:
         Variables:
           S3_BUCKET: dyscalculia-tools-187249759
       Events:
+        # Handle all routes
+        RootPath:
+          Type: Api
+          Properties:
+            Path: /
+            Method: get
+        AboutPath:
+          Type: Api
+          Properties:
+            Path: /about
+            Method: get
+        ToolPath:
+          Type: Api
+          Properties:
+            Path: /tool/{id}
+            Method: get
         SearchAPI:
           Type: Api
           Properties:
@@ -31,25 +144,22 @@ Resources:
         OptionsAPI:
           Type: Api
           Properties:
-            Path: /{proxy+}
+            Path: /api/{proxy+}
             Method: options
-        ToolPageAPI:
-          Type: Api
-          Properties:
-            Path: /tool/{id}
-            Method: get
-        HomePageAPI:
-          Type: Api
-          Properties:
-            Path: /
-            Method: get
-        AboutPageAPI:
-          Type: Api
-          Properties:
-            Path: /about
-            Method: get
 
 Outputs:
+  WebsiteURL:
+    Description: "Website URL"
+    Value: !Sub "https://${DomainName}"
+  CloudFrontDistributionId:
+    Description: "CloudFront Distribution ID"
+    Value: !Ref CloudFrontDistribution
+  CloudFrontDomainName:
+    Description: "CloudFront Domain Name"
+    Value: !GetAtt CloudFrontDistribution.DomainName
+  S3BucketName:
+    Description: "S3 Bucket for website content"
+    Value: !Ref WebsiteBucket
   DyscalculiaResearchAPI:
     Description: "API Gateway endpoint URL"
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"

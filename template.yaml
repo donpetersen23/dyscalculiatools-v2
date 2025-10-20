@@ -60,9 +60,9 @@ Resources:
     Type: AWS::CloudFront::Distribution
     Properties:
       DistributionConfig:
-        Aliases:
-          - !Ref DomainName
-          - !Sub "www.${DomainName}"
+        # Aliases:
+        #   - !Ref DomainName
+        #   - !Sub "www.${DomainName}"
         DefaultCacheBehavior:
           TargetOriginId: APIOrigin
           ViewerProtocolPolicy: redirect-to-https
@@ -100,9 +100,7 @@ Resources:
         Enabled: true
         # DefaultRootObject: index.html  # Not needed - Lambda handles all routes
         ViewerCertificate:
-          AcmCertificateArn: !Ref CertificateArn
-          SslSupportMethod: sni-only
-          MinimumProtocolVersion: TLSv1.2_2021
+          CloudFrontDefaultCertificate: true
         # CustomErrorResponses not needed - Lambda handles all routes
 
   # Lambda function for backend API
@@ -151,7 +149,7 @@ Resources:
 Outputs:
   WebsiteURL:
     Description: "Website URL"
-    Value: !Sub "https://${DomainName}"
+    Value: !Sub "https://${CloudFrontDistribution.DomainName}"
   CloudFrontDistributionId:
     Description: "CloudFront Distribution ID"
     Value: !Ref CloudFrontDistribution

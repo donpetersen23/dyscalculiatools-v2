@@ -26,9 +26,8 @@ jobs:
       
       - name: Deploy Lambda with SAM
         run: |
-          # Copy data files to root for Lambda packaging
-          cp tools_data.json ./
-          cp research_metadata.json ./
+          # Verify required files exist
+          ls -la tools_data.json research_metadata.json templates/
           sam build
           sam deploy --no-confirm-changeset --no-fail-on-empty-changeset
       

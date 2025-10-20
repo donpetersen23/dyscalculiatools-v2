@@ -35,3 +35,12 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+Images/
+cloudfront/
+docs/
+*.bat
+app.py
+index.html
+about.html
+mult-div-tool.html
+array-tool.html

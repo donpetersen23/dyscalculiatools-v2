@@ -1,9 +1,18 @@
 import json
 import boto3
 import logging
+import os
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
+
+# Load tools data
+try:
+    with open('tools_data.json', 'r') as f:
+        TOOLS_DATA = json.load(f)
+except FileNotFoundError:
+    logger.error("tools_data.json not found")
+    TOOLS_DATA = []
 
 def lambda_handler(event, context):
     """AWS Lambda handler for the research assistant API"""
@@ -26,22 +35,29 @@ def lambda_handler(event, context):
         method = event.get('httpMethod', 'GET')
         
         # Handle API routes
-        if path == '/api/search' and method == 'POST':
+        if path == '/' and method == 'GET':
+            return handle_homepage(event)
+        elif path == '/about' and method == 'GET':
+            return handle_about_page(event)
+        elif path == '/api/search' and method == 'POST':
             return handle_search(event)
         elif path == '/api/generate-brief' and method == 'POST':
             return handle_generate_brief(event)
+        elif path.startswith('/tool/') and method == 'GET':
+            return handle_tool_page(event)
         else:
             return {
                 'statusCode': 404,
-                'headers': {'Access-Control-Allow-Origin': '*'},
-                'body': json.dumps({'error': 'Not found'})
+                'headers': {'Content-Type': 'text/html'},
+                'body': '<h1>404 - Page Not Found</h1>'
             }
             
     except Exception as e:
+        logger.error(f"Error in lambda_handler: {str(e)}")
         return {
             'statusCode': 500,
-            'headers': {'Access-Control-Allow-Origin': '*'},
-            'body': json.dumps({'error': str(e)})
+            'headers': {'Content-Type': 'text/html'},
+            'body': f'<h1>Error</h1><p>{str(e)}</p>'
         }
 
 def handle_search(event):
@@ -106,4 +122,109 @@ def handle_generate_brief(event):
             'statusCode': 500,
             'headers': {'Access-Control-Allow-Origin': '*'},
             'body': json.dumps({'error': str(e)})
+        }
+
+def handle_tool_page(event):
+    """Generate complete HTML page for a specific tool"""
+    try:
+        # Extract tool ID from path (e.g., /tool/multiplication-grid)
+        path = event.get('path', '')
+        tool_id = path.replace('/tool/', '')
+        
+        # Find the tool in data
+        tool = None
+        for t in TOOLS_DATA:
+            if t.get('id') == tool_id:
+                tool = t
+                break
+        
+        if not tool:
+            return {
+                'statusCode': 404,
+                'headers': {'Content-Type': 'text/html'},
+                'body': '<h1>Tool not found</h1>'
+            }
+        
+        # Load templates
+        with open('templates/base.html', 'r') as f:
+            base_template = f.read()
+        with open('templates/tool_detail.html', 'r') as f:
+            tool_template = f.read()
+        
+        # Build steps HTML
+        steps_html = ''.join([f'<li>{step}</li>' for step in tool.get('steps', [])])
+        
+        # Build challenges HTML
+        challenges_html = '<ul>' + ''.join([f'<li>{c}</li>' for c in tool.get('challenges', [])]) + '</ul>'
+        
+        # Build tags HTML
+        tags_html = ''.join([f'<span class="tag tool-tag">{tag}</span>' for tag in tool.get('tags', [])])
+        
+        # Fill in tool template
+        tool_content = tool_template.replace('{{title}}', tool.get('title', ''))
+        tool_content = tool_content.replace('{{description}}', tool.get('description', ''))
+        tool_content = tool_content.replace('{{age_range}}', tool.get('age_range', ''))
+        tool_content = tool_content.replace('{{setting}}', tool.get('setting', ''))
+        tool_content = tool_content.replace('{{time_required}}', tool.get('time_required', ''))
+        tool_content = tool_content.replace('{{materials}}', tool.get('materials', ''))
+        tool_content = tool_content.replace('{{steps}}', steps_html)
+        tool_content = tool_content.replace('{{challenges}}', challenges_html)
+        tool_content = tool_content.replace('{{tags}}', tags_html)
+        
+        # Fill in base template
+        html = base_template.replace('{{title}}', tool.get('title', ''))
+        html = html.replace('{{content}}', tool_content)
+        
+        return {
+            'statusCode': 200,
+            'headers': {'Content-Type': 'text/html'},
+            'body': html
+        }
+        
+    except Exception as e:
+        logger.error(f"Error generating tool page: {str(e)}")
+        return {
+            'statusCode': 500,
+            'headers': {'Content-Type': 'text/html'},
+            'body': f'<h1>Error</h1><p>{str(e)}</p>'
+        }
+
+def handle_homepage(event):
+    """Generate homepage from template"""
+    try:
+        with open('templates/homepage.html', 'r') as f:
+            html = f.read()
+        
+        return {
+            'statusCode': 200,
+            'headers': {'Content-Type': 'text/html'},
+            'body': html
+        }
+        
+    except Exception as e:
+        logger.error(f"Error generating homepage: {str(e)}")
+        return {
+            'statusCode': 500,
+            'headers': {'Content-Type': 'text/html'},
+            'body': f'<h1>Error</h1><p>{str(e)}</p>'
+        }
+
+def handle_about_page(event):
+    """Generate about page from template"""
+    try:
+        with open('templates/about.html', 'r') as f:
+            html = f.read()
+        
+        return {
+            'statusCode': 200,
+            'headers': {'Content-Type': 'text/html'},
+            'body': html
+        }
+        
+    except Exception as e:
+        logger.error(f"Error generating about page: {str(e)}")
+        return {
+            'statusCode': 500,
+            'headers': {'Content-Type': 'text/html'},
+            'body': f'<h1>Error</h1><p>{str(e)}</p>'
         }

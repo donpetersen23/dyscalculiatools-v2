@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}} - Dyscalculia Tools</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Dyscalculia Tools</h1>
+        <p>Evidence-Based Techniques for Dyscalculia</p>
+        <div class="auth-buttons">
+            <button id="auth-btn" onclick="showSignup()">Sign In / Sign Up</button>
+            <div id="user-menu" style="display: none;">
+                <span id="username-display"></span>
+                <button onclick="logout()">Logout</button>
+            </div>
+        </div>
+    </header>
+    <main>
+        {{content}}
+    </main>
+    <footer>
+        <nav>
+            <a href="/about.html">About</a>
+            <a href="/contact.html">Contact</a>
+        </nav>
+    </footer>
+</body>
+</html>

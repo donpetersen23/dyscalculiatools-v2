@@ -1,0 +1,32 @@
+[
+  {
+    "title": "Number Sense Interventions for Students with Dyscalculia",
+    "authors": "Smith, J., Johnson, M., & Brown, K.",
+    "summary": "This study examines the effectiveness of targeted number sense interventions for students diagnosed with dyscalculia. Results show significant improvement in basic arithmetic skills after 12 weeks of intervention.",
+    "tags": ["number sense", "intervention", "dyscalculia", "arithmetic"],
+    "keywords": ["math difficulties", "learning disability", "numerical cognition"],
+    "year": 2023,
+    "journal": "Journal of Learning Disabilities",
+    "doi": "10.1177/example123"
+  },
+  {
+    "title": "Working Memory and Mathematical Performance in Dyscalculia",
+    "authors": "Davis, L., Wilson, R., & Taylor, S.",
+    "summary": "Research investigating the relationship between working memory capacity and mathematical performance in individuals with dyscalculia. Findings suggest targeted working memory training may improve math outcomes.",
+    "tags": ["working memory", "dyscalculia", "mathematical performance", "cognitive training"],
+    "keywords": ["executive function", "memory training", "math anxiety"],
+    "year": 2022,
+    "journal": "Developmental Psychology",
+    "doi": "10.1037/example456"
+  },
+  {
+    "title": "Early Identification of Dyscalculia Risk Factors",
+    "authors": "Anderson, P., Martinez, C., & Lee, H.",
+    "summary": "A longitudinal study identifying early risk factors for dyscalculia in preschool children. Key predictors include difficulties with subitizing, number comparison, and spatial processing.",
+    "tags": ["early identification", "risk factors", "preschool", "assessment"],
+    "keywords": ["subitizing", "number comparison", "spatial processing", "screening"],
+    "year": 2023,
+    "journal": "Child Development",
+    "doi": "10.1111/example789"
+  }
+]

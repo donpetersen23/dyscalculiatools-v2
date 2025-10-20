@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dyscalculia Tools</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Dyscalculia Tools</h1>
+        <p>Evidence-Based Techniques for Dyscalculia</p>
+        <div class="auth-buttons">
+            <button id="auth-btn" onclick="showSignup()">Sign In / Sign Up</button>
+            <div id="user-menu" style="display: none;">
+                <span id="username-display"></span>
+                <button onclick="logout()">Logout</button>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section class="welcome">
+            <h2>Building Solutions for Dyscalculia</h2>
+            <p>Dyscalculia is as common as dyslexia - yet it's rarely recognized or understood. Many bright kids struggle with math basics while their needs go unmet because teachers and parents don't know what dyscalculia looks like.</p>
+            <p><strong>The challenge:</strong> Unlike dyslexia, dyscalculia lacks awareness, research funding, and proven interventions. Students often feel "bad at math" when they actually have a learning difference that can be supported.</p>
+            <p><strong>Join our growing community:</strong> Whether you're discovering strategies in your classroom, researching new approaches, supporting a child at home, or improving your own abilities - your experience matters in changing this.</p>
+            <p><strong>Together we can:</strong> Raise awareness, share proven techniques, and build the resources that students with dyscalculia truly deserve.</p>
+            <p><em>Join us in making mathematics accessible for all.</em></p>
+        </section>
+        
+        <!-- Login Modal -->
+        <div id="login-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('login-modal')">&times;</span>
+                <h2>Login</h2>
+                <form id="login-form">
+                    <input type="email" placeholder="Email" required>
+                    <input type="password" placeholder="Password" required>
+                    <button type="submit">Login</button>
+                </form>
+                <p>Don't have an account? <a href="#" onclick="closeModal('login-modal'); showSignup();">Sign up</a></p>
+            </div>
+        </div>
+        
+        <!-- Signup Modal -->
+        <div id="signup-modal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('signup-modal')">&times;</span>
+                <h2>Join the Community</h2>
+                <form id="signup-form">
+                    <input type="text" placeholder="Name" required>
+                    <input type="email" placeholder="Email" required>
+                    <select required>
+                        <option value="">I am a...</option>
+                        <option value="parent">Parent</option>
+                        <option value="teacher">Teacher</option>
+                        <option value="tutor">Tutor</option>
+                        <option value="researcher">Researcher</option>
+                        <option value="individual">Individual with dyscalculia</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <input type="password" placeholder="Password" required>
+                    <button type="submit">Join Community</button>
+                </form>
+                <p>Already have an account? <a href="#" onclick="closeModal('signup-modal'); showLogin();">Login</a></p>
+            </div>
+        </div>
+    </main>
+    <script>
+        function showTools() {
+            document.getElementById('tools-section').style.display = 'block';
+            document.getElementById('research-section').style.display = 'none';
+            document.querySelector('.primary-btn').classList.add('active');
+            document.querySelector('.secondary-btn').classList.remove('active');
+        }
+        
+        function showResearch() {
+            document.getElementById('tools-section').style.display = 'none';
+            document.getElementById('research-section').style.display = 'block';
+            document.querySelector('.secondary-btn').classList.add('active');
+            document.querySelector('.primary-btn').classList.remove('active');
+        }
+        
+        // Tools and research search functionality
+        let toolsData = [];
+        let researchData = [];
+        
+        // Load tools data
+        fetch('tools_data.json')
+            .then(response => response.json())
+            .then(data => {
+                toolsData = data;
+            })
+            .catch(error => console.error('Error loading tools data:', error));
+        
+        // Load research metadata
+        fetch('research_metadata.json')
+            .then(response => response.json())
+            .then(data => {
+                researchData = data;
+            })
+            .catch(error => console.error('Error loading research data:', error));
+        
+        function searchTools() {
+            const query = document.getElementById('tools-search').value.toLowerCase();
+            if (!query.trim()) {
+                document.getElementById('tools-results').innerHTML = '';
+                return;
+            }
+            
+            const results = toolsData.filter(tool => 
+                tool.title.toLowerCase().includes(query) ||
+                tool.description.toLowerCase().includes(query) ||
+                tool.tags.some(tag => tag.toLowerCase().includes(query)) ||
+                tool.challenges.some(challenge => challenge.toLowerCase().includes(query))
+            );
+            
+            displayToolsResults(results);
+        }
+        
+        function quickSearchTools(query) {
+            document.getElementById('tools-search').value = query;
+            const results = toolsData.filter(tool => 
+                tool.title.toLowerCase().includes(query.toLowerCase()) ||
+                tool.tags.some(tag => tag.toLowerCase().includes(query.toLowerCase())) ||
+                tool.challenges.some(challenge => challenge.toLowerCase().includes(query.toLowerCase()))
+            );
+            displayToolsResults(results);
+        }
+        
+        function displayToolsResults(results) {
+            const resultsDiv = document.getElementById('tools-results');
+            if (!results || results.length === 0) {
+                resultsDiv.innerHTML = '<p>No tools found matching your search.</p>';
+                return;
+            }
+            
+            let html = '<div class="results-count">Found ' + results.length + ' tools and strategies</div>';
+            results.forEach(tool => {
+                html += `
+                    <div class="tool-item">
+                        <h3>${tool.title}</h3>
+                        <p class="tool-description">${tool.description}</p>
+                        <div class="tool-details">
+                            <p><strong>Age Range:</strong> ${tool.age_range}</p>
+                            <p><strong>Setting:</strong> ${tool.setting}</p>
+                            <p><strong>Time Required:</strong> ${tool.time_required}</p>
+                            <p><strong>Materials:</strong> ${tool.materials}</p>
+                        </div>
+                        <div class="tool-steps">
+                            <h4>How to Use:</h4>
+                            <ol>
+                                ${tool.steps.map(step => `<li>${step}</li>`).join('')}
+                            </ol>
+                        </div>
+                        <div class="tags">
+                            ${tool.tags.map(tag => `<span class="tag tool-tag">${tag}</span>`).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+            resultsDiv.innerHTML = html;
+        }
+        
+        function searchResearch() {
+            const query = document.getElementById('research-search').value.toLowerCase();
+            if (!query.trim()) {
+                document.getElementById('search-results').innerHTML = '';
+                return;
+            }
+            
+            const results = researchData.filter(item => 
+                item.title.toLowerCase().includes(query) ||
+                item.authors.toLowerCase().includes(query) ||
+                item.summary.toLowerCase().includes(query) ||
+                item.tags.some(tag => tag.toLowerCase().includes(query)) ||
+                (item.keywords && item.keywords.some(keyword => keyword.toLowerCase().includes(query)))
+            );
+            
+            displayResults(results);
+        }
+        
+        function quickSearch(query) {
+            document.getElementById('research-search').value = query;
+            const results = researchData.filter(item => 
+                item.title.toLowerCase().includes(query.toLowerCase()) ||
+                item.tags.some(tag => tag.toLowerCase().includes(query.toLowerCase())) ||
+                (item.keywords && item.keywords.some(keyword => keyword.toLowerCase().includes(query.toLowerCase())))
+            );
+            displayResults(results);
+        }
+        
+        function displayResults(data) {
+            const resultsDiv = document.getElementById('search-results');
+            if (!data || data.length === 0) {
+                resultsDiv.innerHTML = '<p>No research found matching your search.</p>';
+                return;
+            }
+            
+            let html = '<div class="results-count">Found ' + data.length + ' research studies</div>';
+            data.forEach(item => {
+                html += `
+                    <div class="result-item">
+                        <h3>${item.title}</h3>
+                        <p class="authors">${item.authors}</p>
+                        <p class="summary">${item.summary}</p>
+                        <div class="tags">
+                            ${item.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+            resultsDiv.innerHTML = html;
+        }
+        
+        function showLogin() {
+            document.getElementById('login-modal').style.display = 'block';
+        }
+        
+        function showSignup() {
+            document.getElementById('signup-modal').style.display = 'block';
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+        
+        function logout() {
+            document.getElementById('user-menu').style.display = 'none';
+            document.getElementById('auth-btn').style.display = 'block';
+        }
+        
+        // Show tools by default and add enter key support
+        document.addEventListener('DOMContentLoaded', function() {
+            showTools();
+            
+            document.getElementById('tools-search').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    searchTools();
+                }
+            });
+            
+            document.getElementById('research-search').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    searchResearch();
+                }
+            });
+        });
+    </script>

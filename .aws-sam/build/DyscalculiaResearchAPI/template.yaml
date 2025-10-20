@@ -30,6 +30,16 @@ Resources:
           Properties:
             Path: /{proxy+}
             Method: options
+        ToolPageAPI:
+          Type: Api
+          Properties:
+            Path: /tool/{id}
+            Method: get
+        HomePageAPI:
+          Type: Api
+          Properties:
+            Path: /
+            Method: get
 
 Outputs:
   DyscalculiaResearchAPI:

@@ -26,14 +26,14 @@ jobs:
       
       - name: Deploy Lambda with SAM
         run: |
+          # Copy data files to root for Lambda packaging
+          cp tools_data.json ./
+          cp research_metadata.json ./
           sam build
           sam deploy --no-confirm-changeset --no-fail-on-empty-changeset
       
-      - name: Deploy frontend to S3
+      - name: Deploy static assets to S3
         run: |
-          aws s3 cp index.html s3://dyscalculia-tools-187249759/
-          aws s3 cp array-tool.html s3://dyscalculia-tools-187249759/
-          aws s3 cp mult-div-tool.html s3://dyscalculia-tools-187249759/
           aws s3 cp styles.css s3://dyscalculia-tools-187249759/
           aws s3 cp tools_data.json s3://dyscalculia-tools-187249759/
           aws s3 cp research_metadata.json s3://dyscalculia-tools-187249759/

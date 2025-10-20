@@ -14,6 +14,9 @@ Resources:
       CodeUri: .
       Handler: lambda_function.lambda_handler
       Runtime: python3.11
+      Environment:
+        Variables:
+          S3_BUCKET: dyscalculia-tools-187249759
       Events:
         SearchAPI:
           Type: Api
@@ -30,6 +33,21 @@ Resources:
           Properties:
             Path: /{proxy+}
             Method: options
+        ToolPageAPI:
+          Type: Api
+          Properties:
+            Path: /tool/{id}
+            Method: get
+        HomePageAPI:
+          Type: Api
+          Properties:
+            Path: /
+            Method: get
+        AboutPageAPI:
+          Type: Api
+          Properties:
+            Path: /about
+            Method: get
 
 Outputs:
   DyscalculiaResearchAPI:

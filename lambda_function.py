@@ -146,10 +146,18 @@ def handle_tool_page(event):
             }
         
         # Load templates
-        with open('templates/base.html', 'r') as f:
-            base_template = f.read()
-        with open('templates/tool_detail.html', 'r') as f:
-            tool_template = f.read()
+        try:
+            with open('templates/base.html', 'r') as f:
+                base_template = f.read()
+            with open('templates/tool_detail.html', 'r') as f:
+                tool_template = f.read()
+        except FileNotFoundError as e:
+            logger.error(f"Template file not found: {e}")
+            return {
+                'statusCode': 500,
+                'headers': {'Content-Type': 'text/html'},
+                'body': f'<h1>Template Error</h1><p>Template file not found: {e}</p>'
+            }
         
         # Build steps HTML
         steps_html = ''.join([f'<li>{step}</li>' for step in tool.get('steps', [])])
@@ -192,12 +200,20 @@ def handle_tool_page(event):
 def handle_homepage(event):
     """Generate homepage from components"""
     try:
-        with open('templates/base.html', 'r') as f:
-            base = f.read()
-        with open('templates/home-content.html', 'r') as f:
-            content = f.read()
-        with open('templates/home-scripts.html', 'r') as f:
-            scripts = f.read()
+        try:
+            with open('templates/base.html', 'r') as f:
+                base = f.read()
+            with open('templates/home-content.html', 'r') as f:
+                content = f.read()
+            with open('templates/home-scripts.html', 'r') as f:
+                scripts = f.read()
+        except FileNotFoundError as e:
+            logger.error(f"Template file not found: {e}")
+            return {
+                'statusCode': 500,
+                'headers': {'Content-Type': 'text/html'},
+                'body': f'<h1>Template Error</h1><p>Template file not found: {e}</p>'
+            }
         
         html = base.replace('{{title}}', 'Home')
         html = html.replace('{{content}}', content)
@@ -220,12 +236,20 @@ def handle_homepage(event):
 def handle_about_page(event):
     """Generate about page from components"""
     try:
-        with open('templates/base.html', 'r') as f:
-            base = f.read()
-        with open('templates/about-content.html', 'r') as f:
-            content = f.read()
-        with open('templates/about-scripts.html', 'r') as f:
-            scripts = f.read()
+        try:
+            with open('templates/base.html', 'r') as f:
+                base = f.read()
+            with open('templates/about-content.html', 'r') as f:
+                content = f.read()
+            with open('templates/about-scripts.html', 'r') as f:
+                scripts = f.read()
+        except FileNotFoundError as e:
+            logger.error(f"Template file not found: {e}")
+            return {
+                'statusCode': 500,
+                'headers': {'Content-Type': 'text/html'},
+                'body': f'<h1>Template Error</h1><p>Template file not found: {e}</p>'
+            }
         
         html = base.replace('{{title}}', 'About')
         html = html.replace('{{content}}', content)

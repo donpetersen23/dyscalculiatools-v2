@@ -38,7 +38,8 @@ jobs:
             --include "research_metadata.json" \
             --include "*.ico" \
             --include "*.png" \
-            --cache-control "max-age=86400"
+            --cache-control "max-age=86400" \
+            --delete
       
       - name: Invalidate CloudFront
         run: aws cloudfront create-invalidation --distribution-id EMANNVI38BDCI --paths "/*"

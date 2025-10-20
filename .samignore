@@ -40,11 +40,8 @@ cloudfront/
 docs/
 *.bat
 app.py
-index.html
-about.html
-mult-div-tool.html
-array-tool.html
 archive/
 build.py
 deploy-complete.bat
 *.md
+requirements.txt

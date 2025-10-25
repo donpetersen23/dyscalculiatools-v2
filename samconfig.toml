@@ -1,10 +1,14 @@
 version = 0.1
 [default]
+[default.build]
+[default.build.parameters]
+build_dir = "../.aws-sam/build"
+
 [default.deploy]
 [default.deploy.parameters]
 stack_name = "dyscalculia-tools-v2"
 s3_bucket = ""
-s3_prefix = "dyscalculia-tools"
+s3_prefix = "dyscalculia-tools-v2"
 region = "us-east-1"
 confirm_changeset = true
 capabilities = "CAPABILITY_IAM"
@@ -12,3 +16,4 @@ capabilities = "CAPABILITY_IAM"
 
 image_repositories = []
 resolve_s3 = true
+parameter_overrides = "DomainName=\"dyscalculiatools.com\" CertificateArn=\"arn:aws:acm:us-east-1:536697250341:certificate/1f5ff665-ee83-45b7-b66c-6a3d2bb9bdc4\""

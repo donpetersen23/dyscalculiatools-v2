@@ -6,7 +6,6 @@
     <title>{{title}} - Dyscalculia Tools</title>
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="shortcut icon" href="/favicon.ico">
     <link rel="stylesheet" href="/styles.css">
 </head>
@@ -15,21 +14,20 @@
         <h1>Dyscalculia Tools</h1>
         <p>Evidence-Based Techniques for Dyscalculia</p>
         <div class="auth-buttons">
-            <button id="auth-btn" onclick="showSignup()">Sign In / Sign Up</button>
+            <button class="btn btn-primary btn-auth" id="auth-btn" onclick="showSignup()">Sign In / Sign Up</button>
             <div id="user-menu" style="display: none;">
                 <span id="username-display"></span>
-                <button onclick="logout()">Logout</button>
+                <button class="btn btn-primary btn-auth" onclick="logout()">Logout</button>
             </div>
         </div>
     </header>
-    <main>
-        {{content}}
-    </main>
+    {{content}}
     <footer>
         <nav>
-            <a href="/about.html">About</a>
-            <a href="/contact.html">Contact</a>
+            <a href="/about">About</a>
+            <a href="/contact">Contact</a>
         </nav>
     </footer>
+    {{scripts}}
 </body>
 </html>

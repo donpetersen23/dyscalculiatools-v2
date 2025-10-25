@@ -17,3 +17,18 @@ node_modules/
 # Temporary files
 *.tmp
 *.temp
+temp-*/
+
+# SAM build artifacts
+.aws-sam/
+__pycache__/
+packaged*.yaml
+packaged*.zip
+
+# Config files (generated)
+*-config.json
+current-*.json
+
+# Old/backup files
+*.old
+*.backup

@@ -56,11 +56,10 @@ Resources:
                 - pip install aws-sam-cli
             build:
               commands:
-                - ls -la
-                - pwd
-                - find . -name template.yaml
-                - sam build
-                - sam package --output-template-file packaged.yaml --s3-bucket $ARTIFACT_BUCKET
+                - echo "Building from template.yaml"
+                - cat template.yaml | head -50
+                - sam build --use-container
+                - sam package --output-template-file packaged.yaml --s3-bucket $ARTIFACT_BUCKET --force-upload
           artifacts:
             files:
               - packaged.yaml

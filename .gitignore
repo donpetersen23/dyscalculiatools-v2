@@ -32,3 +32,6 @@ current-*.json
 # Old/backup files
 *.old
 *.backup
+
+# Archive folder
+archive/

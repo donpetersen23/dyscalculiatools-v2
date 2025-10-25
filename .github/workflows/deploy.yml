@@ -20,26 +20,29 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
       
-      - name: Install SAM CLI
+      - name: Install dependencies
         run: |
-          pip install aws-sam-cli
+          pip install aws-sam-cli boto3
+      
+      - name: Validate AWS configuration
+        run: python validate-aws-config.py
       
       - name: Deploy Lambda with templates
         run: |
           sam build
           sam deploy --no-confirm-changeset --no-fail-on-empty-changeset
       
+      - name: Load AWS config
+        id: aws-config
+        run: |
+          echo "s3_bucket=$(jq -r '.aws.s3_bucket' aws-config.json)" >> $GITHUB_OUTPUT
+          echo "distribution_id=$(jq -r '.aws.cloudfront_distribution_id' aws-config.json)" >> $GITHUB_OUTPUT
+      
       - name: Deploy static assets to S3
         run: |
-          aws s3 sync . s3://dyscalculia-tools-187249759/ \
-            --exclude "*" \
-            --include "styles.css" \
-            --include "tools_data.json" \
-            --include "research_metadata.json" \
-            --include "*.ico" \
-            --include "*.png" \
+          aws s3 sync static/ s3://${{ steps.aws-config.outputs.s3_bucket }}/ \
             --cache-control "max-age=86400" \
             --delete
       
       - name: Invalidate CloudFront
-        run: aws cloudfront create-invalidation --distribution-id EMANNVI38BDCI --paths "/*"
+        run: aws cloudfront create-invalidation --distribution-id ${{ steps.aws-config.outputs.distribution_id }} --paths "/*"

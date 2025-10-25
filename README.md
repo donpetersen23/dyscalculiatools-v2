@@ -36,6 +36,7 @@ dyscalculiatools/
 ├── template.yaml          # Infrastructure definition
 ├── pipeline.yaml          # CI/CD pipeline
 ├── requirements.txt       # Python dependencies
+├── aws-config.json        # AWS resource configuration
 └── README.md
 ```
 

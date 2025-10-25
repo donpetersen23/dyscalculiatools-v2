@@ -129,8 +129,8 @@ Resources:
   DyscalculiaResearchAPI:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: .
-      Handler: lambda.lambda_function.lambda_handler
+      CodeUri: lambda/
+      Handler: lambda_function.lambda_handler
       Runtime: python3.11
       AutoPublishAlias: live
       Environment:

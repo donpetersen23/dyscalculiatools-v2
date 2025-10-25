@@ -4,11 +4,20 @@ A serverless web application providing research-based tools and resources for dy
 
 ## Architecture
 
-- **Frontend**: Static HTML/CSS/JS served via CloudFront
-- **Backend**: AWS Lambda (Python 3.11) with HTTP API Gateway
-- **Storage**: S3 for static assets
+**Hybrid Static + API Model** for optimal performance and cost:
+
+- **Static Pages**: HTML served from S3 via CloudFront (homepage, about, contact)
+- **API Endpoints**: AWS Lambda (Python 3.11) with HTTP API Gateway (`/api/*`)
+- **Storage**: S3 for static assets (CSS, JS, images, JSON)
 - **CDN**: CloudFront with custom domain (dyscalculiatools.com)
-- **CI/CD**: AWS CodePipeline with automated deployments from GitHub
+- **CI/CD**: GitHub Actions with automated deployments
+
+### Request Flow
+```
+User Request → CloudFront
+    ├─→ S3 (*.html, *.css, *.js, *.json, images) - Cached, fast
+    └─→ Lambda (/api/*) - Dynamic API responses
+```
 
 ## Infrastructure
 
@@ -28,15 +37,21 @@ All infrastructure is defined as code using AWS SAM (Serverless Application Mode
 
 ```
 dyscalculiatools/
-├── lambda/                 # Lambda function code
+├── lambda/                    # Lambda function code (API only)
 │   └── lambda_function.py
-├── templates/              # HTML templates
-├── static/                 # CSS, JS, images, JSON data
-├── docs/                   # Documentation
-├── template.yaml          # Infrastructure definition
-├── pipeline.yaml          # CI/CD pipeline
-├── requirements.txt       # Python dependencies
-├── aws-config.json        # AWS resource configuration
+├── templates/                 # HTML templates (source)
+├── static/                    # Generated HTML + static assets
+│   ├── index.html            # Generated from templates
+│   ├── about.html            # Generated from templates
+│   ├── contact.html          # Generated from templates
+│   ├── styles.css
+│   ├── *.js
+│   └── *.json
+├── docs/                      # Documentation
+├── build_static_pages.py      # Build script (generates HTML)
+├── test_static_build.py       # Validates generated HTML
+├── template.yaml              # Infrastructure definition
+├── aws-config.json            # AWS resource configuration
 └── README.md
 ```
 
@@ -47,7 +62,20 @@ dyscalculiatools/
 - AWS SAM CLI installed
 - Python 3.11
 
-### Testing Locally
+### Build Static Pages
+
+```bash
+# Generate static HTML from templates
+python build_static_pages.py
+
+# Validate generated HTML
+python test_static_build.py
+
+# Preview in browser
+start static/index.html
+```
+
+### Testing Lambda (API)
 
 ```bash
 # Validate template
@@ -71,19 +99,24 @@ sam deploy
 
 ## CI/CD Pipeline
 
-The project uses AWS CodePipeline for automated deployments:
+The project uses GitHub Actions for automated deployments:
 
-1. **Source**: Pulls from `donpetersen23/dyscalculiatools-v2` (main branch)
-2. **Build**: Runs `sam build` and `sam package` via CodeBuild
-3. **Deploy**: Deploys to CloudFormation stack `dyscalculia-tools-v2`
+1. **Build Static Pages**: Generates HTML from templates
+2. **Deploy Lambda**: Builds and deploys API function via SAM
+3. **Upload to S3**: Syncs static files to S3 bucket
+4. **Invalidate CloudFront**: Clears CDN cache
 
-### Pipeline Details
-- **Pipeline**: dyscalculia-pipeline-pipeline
-- **GitHub Connection**: arn:aws:codeconnections:us-east-1:536697250341:connection/065a759a-dfa6-4689-8dbe-35ad168a8521
+### Deployment Steps
+```bash
+python build_static_pages.py              # Generate HTML
+sam build && sam deploy                    # Deploy Lambda
+aws s3 sync static/ s3://bucket/          # Upload static files
+aws cloudfront create-invalidation ...     # Clear cache
+```
 
 ## Deployment
 
-Every push to `main` branch automatically triggers the pipeline:
+Every push to `main` branch automatically triggers GitHub Actions:
 
 ```bash
 git add .
@@ -91,7 +124,7 @@ git commit -m "Your changes"
 git push origin main
 ```
 
-Monitor deployment: https://console.aws.amazon.com/codesuite/codepipeline/pipelines/dyscalculia-pipeline-pipeline/view
+Monitor deployment: https://github.com/donpetersen23/dyscalculiatools-v2/actions
 
 ## Monitoring
 

@@ -70,10 +70,10 @@ Resources:
           - !Ref DomainName
           - !Sub "www.${DomainName}"
         DefaultCacheBehavior:
-          TargetOriginId: APIOrigin
+          TargetOriginId: S3Origin
           ViewerProtocolPolicy: redirect-to-https
-          CachePolicyId: 4135ea2d-6df8-44a3-9df3-4b5a84be39ad  # Managed-CachingDisabled
-          OriginRequestPolicyId: b689b0a8-53d0-40ab-baf2-68738e2966ac  # Managed-AllViewerExceptHostHeader
+          CachePolicyId: 658327ea-f89d-4fab-a63d-7e88639e58f6  # Managed-CachingOptimized
+        DefaultRootObject: index.html
         CacheBehaviors:
           - PathPattern: "/api/*"
             TargetOriginId: APIOrigin

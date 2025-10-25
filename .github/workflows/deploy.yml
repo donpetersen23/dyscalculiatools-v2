@@ -27,6 +27,9 @@ jobs:
       - name: Validate AWS configuration
         run: python validate-aws-config.py
       
+      - name: Build static pages
+        run: python build_static_pages.py
+      
       - name: Deploy Lambda with templates
         run: |
           sam build

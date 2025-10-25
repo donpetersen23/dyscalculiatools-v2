@@ -56,11 +56,12 @@ Resources:
                 - pip install aws-sam-cli
             build:
               commands:
+                - cd src
                 - sam build
                 - sam package --output-template-file packaged.yaml --s3-bucket $ARTIFACT_BUCKET
           artifacts:
             files:
-              - packaged.yaml
+              - src/packaged.yaml
 
   # CodePipeline
   Pipeline:
@@ -123,7 +124,7 @@ Resources:
                 ActionMode: CREATE_UPDATE
                 StackName: dyscalculia-tools-v2
                 Capabilities: CAPABILITY_IAM,CAPABILITY_AUTO_EXPAND
-                TemplatePath: BuildOutput::packaged.yaml
+                TemplatePath: BuildOutput::src/packaged.yaml
                 RoleArn: !GetAtt CloudFormationRole.Arn
               InputArtifacts:
                 - Name: BuildOutput

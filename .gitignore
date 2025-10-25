@@ -26,7 +26,6 @@ packaged*.yaml
 packaged*.zip
 
 # Config files (generated)
-*-config.json
 current-*.json
 
 # Old/backup files

@@ -1,0 +1,45 @@
+{
+  "concerns_ranked": [
+    {
+      "concern": "time",
+      "frequency": 108
+    },
+    {
+      "concern": "basic_arithmetic",
+      "frequency": 75
+    },
+    {
+      "concern": "number_sense",
+      "frequency": 51
+    },
+    {
+      "concern": "anxiety",
+      "frequency": 25
+    },
+    {
+      "concern": "spatial",
+      "frequency": 24
+    },
+    {
+      "concern": "memory",
+      "frequency": 15
+    },
+    {
+      "concern": "money",
+      "frequency": 13
+    },
+    {
+      "concern": "sequencing",
+      "frequency": 11
+    },
+    {
+      "concern": "fractions",
+      "frequency": 3
+    },
+    {
+      "concern": "word_problems",
+      "frequency": 2
+    }
+  ],
+  "total_mentions": 327
+}

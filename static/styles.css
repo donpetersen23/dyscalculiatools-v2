@@ -70,6 +70,7 @@ footer nav a:hover { text-decoration: underline; }
 /* ===== Tags ===== */
 .tag-container { text-align: center; margin-bottom: var(--spacing-lg); }
 .tag-container h3 { margin-bottom: var(--spacing-sm); color: var(--color-dark); }
+.tag-container p { margin-bottom: var(--spacing-sm); }
 .tag-list { display: flex; justify-content: center; gap: var(--spacing-xs); flex-wrap: wrap; }
 
 .tag {
@@ -202,6 +203,42 @@ footer nav a:hover { text-decoration: underline; }
 .summary {
     margin-bottom: var(--spacing-sm);
     line-height: 1.6;
+}
+
+/* ===== Concern-Based Categories ===== */
+.priority-1 { border-color: #e74c3c; background: #fdf2f2; }
+.priority-1:hover { background: #e74c3c; }
+
+.priority-2 { border-color: #f39c12; background: #fef9e7; }
+.priority-2:hover { background: #f39c12; }
+
+.priority-3 { border-color: #f1c40f; background: #fffbf0; }
+.priority-3:hover { background: #f1c40f; }
+
+.priority-4, .priority-5, .priority-6 { border-color: #95a5a6; background: #f8f9fa; }
+.priority-4:hover, .priority-5:hover, .priority-6:hover { background: #95a5a6; }
+
+.concern-stat {
+    font-size: 0.8em;
+    opacity: 0.8;
+    font-weight: normal;
+}
+
+.priority-badge {
+    background: #e74c3c;
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    margin-left: 0.5rem;
+    font-weight: normal;
+}
+
+.concern-category {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    font-style: italic;
 }
 
 

@@ -32,14 +32,15 @@
                 </div>
                 
                 <div class="tag-container">
-                    <h3>Browse by Category:</h3>
+                    <h3>Browse by Parent & Teacher Concerns:</h3>
+                    <p style="font-size: 0.9em; color: #666; margin-bottom: 1rem;">Based on real feedback from 200+ parents and teachers</p>
                     <div class="tag-list">
-                        <button class="tag" onclick="quickSearchTools('Multiplication Facts')">Multiplication Facts</button>
-                        <button class="tag" onclick="quickSearchTools('Number Sense')">Number Sense</button>
-                        <button class="tag" onclick="quickSearchTools('Math Anxiety')">Math Anxiety</button>
-                        <button class="tag" onclick="quickSearchTools('Word Problems')">Word Problems</button>
-                        <button class="tag" onclick="quickSearchTools('Fractions')">Fractions</button>
-                        <button class="tag" onclick="quickSearchTools('Self-Esteem')">Self-Esteem</button>
+                        <button class="tag priority-1" onclick="quickSearchToolsByConcern('Time')">🕐 Time & Clocks <span class="concern-stat">(33%)</span></button>
+                        <button class="tag priority-2" onclick="quickSearchToolsByConcern('Basic Arithmetic')">➕ Basic Arithmetic <span class="concern-stat">(23%)</span></button>
+                        <button class="tag priority-3" onclick="quickSearchToolsByConcern('Number Sense')">🔢 Number Sense <span class="concern-stat">(16%)</span></button>
+                        <button class="tag priority-4" onclick="quickSearchToolsByConcern('Anxiety')">😰 Math Anxiety <span class="concern-stat">(8%)</span></button>
+                        <button class="tag priority-5" onclick="quickSearchToolsByConcern('Spatial')">📐 Spatial Skills <span class="concern-stat">(7%)</span></button>
+                        <button class="tag priority-6" onclick="quickSearchToolsByConcern('Memory')">🧠 Memory Support <span class="concern-stat">(5%)</span></button>
                     </div>
                 </div>
                 
@@ -133,6 +134,16 @@
             displayToolsResults(results);
         }
         
+        function quickSearchToolsByConcern(concernCategory) {
+            document.getElementById('tools-search').value = concernCategory;
+            const results = toolsData.filter(tool => 
+                tool.concern_category && tool.concern_category.toLowerCase().includes(concernCategory.toLowerCase())
+            );
+            // Sort by priority level (lower number = higher priority)
+            results.sort((a, b) => (a.priority_level || 999) - (b.priority_level || 999));
+            displayToolsResults(results);
+        }
+        
         function displayToolsResults(results) {
             const resultsDiv = document.getElementById('tools-results');
             if (!results || results.length === 0) {
@@ -142,9 +153,11 @@
             
             let html = '<div class="results-count">Found ' + results.length + ' tools and strategies</div>';
             results.forEach(tool => {
+                const priorityBadge = tool.priority_level <= 3 ? '<span class="priority-badge">High Priority</span>' : '';
                 html += `
                     <div class="tool-item">
-                        <h3>${tool.title}</h3>
+                        <h3>${tool.title} ${priorityBadge}</h3>
+                        ${tool.concern_category ? `<p class="concern-category">Addresses: ${tool.concern_category}</p>` : ''}
                         <p class="tool-description">${tool.description}</p>
                         <div class="tool-details">
                             <p><strong>Age Range:</strong> ${tool.age_range}</p>

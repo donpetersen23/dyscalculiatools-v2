@@ -1,0 +1,2 @@
+# Lambda function has no external dependencies
+# All HTML is embedded in the code

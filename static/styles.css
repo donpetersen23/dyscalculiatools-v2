@@ -56,32 +56,6 @@ footer nav a:hover { text-decoration: underline; }
 .btn-success:hover, .btn-success.active { background: var(--color-success-dark); }
 
 .btn-sm { padding: var(--spacing-xs) var(--spacing-sm); font-size: 1rem; }
-.primary-btn { 
-    background: var(--color-primary); 
-    color: white; 
-    padding: var(--spacing-sm) var(--spacing-lg);
-    border: none;
-    border-radius: var(--radius-md);
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: var(--transition-normal);
-    vertical-align: middle;
-    display: inline-block;
-}
-.primary-btn:hover, .primary-btn.active { background: var(--color-primary-dark); transform: translateY(-2px); }
-.secondary-btn { 
-    background: var(--color-success); 
-    color: white; 
-    padding: var(--spacing-sm) var(--spacing-lg);
-    border: none;
-    border-radius: var(--radius-md);
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: var(--transition-normal);
-    vertical-align: middle;
-    display: inline-block;
-}
-.secondary-btn:hover, .secondary-btn.active { background: var(--color-success-dark); transform: translateY(-2px); }
 
 /* ===== Cards ===== */
 .card {
@@ -109,20 +83,6 @@ footer nav a:hover { text-decoration: underline; }
     color: var(--color-dark);
 }
 .tag:hover { background: var(--color-primary); color: white; transform: translateY(-1px); }
-
-.tag-btn {
-    padding: 0.4rem 0.8rem;
-    border-radius: var(--radius-lg);
-    cursor: pointer;
-    font-size: 0.9rem;
-    transition: var(--transition-fast);
-    border: 1px solid var(--color-primary);
-    background: #e8f4f8;
-    color: var(--color-dark);
-}
-.tag-btn:hover { background: var(--color-primary); color: white; transform: translateY(-1px); }
-
-.tag-buttons { display: flex; justify-content: center; gap: var(--spacing-xs); flex-wrap: wrap; }
 
 /* ===== Layout ===== */
 .action-buttons { text-align: center; margin: var(--spacing-lg) 0; }
@@ -166,42 +126,6 @@ footer nav a:hover { text-decoration: underline; }
     transition: var(--transition-fast);
 }
 .search-container button:hover { background: var(--color-primary-dark); }
-
-/* ===== Auth ===== */
-.auth-buttons { position: absolute; top: var(--spacing-sm); right: var(--spacing-lg); }
-
-/* ===== Modal ===== */
-.modal {
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.5);
-}
-.modal-content {
-    background: white;
-    margin: 15% auto;
-    padding: var(--spacing-lg);
-    border-radius: var(--radius-md);
-    width: 90%;
-    max-width: 400px;
-    position: relative;
-}
-.close {
-    position: absolute;
-    right: var(--spacing-sm);
-    top: var(--spacing-sm);
-    font-size: 1.5rem;
-    cursor: pointer;
-}
-.modal form { display: flex; flex-direction: column; gap: var(--spacing-sm); }
-.modal input, .modal select {
-    padding: 0.75rem;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-sm);
-}
 
 /* ===== Specific Components ===== */
 .welcome { background: var(--color-bg); padding: var(--spacing-lg); margin-bottom: var(--spacing-lg); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); }
@@ -280,11 +204,4 @@ footer nav a:hover { text-decoration: underline; }
     line-height: 1.6;
 }
 
-.research-tags, .tools-tags {
-    text-align: center;
-    margin-bottom: var(--spacing-lg);
-}
-.research-tags h3, .tools-tags h3 {
-    margin-bottom: var(--spacing-sm);
-    color: var(--color-dark);
-}
+

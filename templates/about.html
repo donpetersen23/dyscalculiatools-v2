@@ -14,13 +14,6 @@
     <header>
         <h1>Dyscalculia Tools</h1>
         <p>Evidence-Based Techniques for Dyscalculia</p>
-        <div class="auth-buttons">
-            <button class="btn btn-primary btn-auth" id="auth-btn" onclick="showSignup()">Sign In / Sign Up</button>
-            <div id="user-menu" style="display: none;">
-                <span id="username-display"></span>
-                <button class="btn btn-primary btn-auth" onclick="logout()">Logout</button>
-            </div>
-        </div>
     </header>
     <main>
         <section class="welcome">
@@ -31,44 +24,7 @@
             <p><strong>Together we can:</strong> Raise awareness, share proven techniques, and build the resources that students with dyscalculia truly deserve.</p>
             <p><em>Join us in making mathematics accessible for all.</em></p>
         </section>
-        
-        <!-- Login Modal -->
-        <div id="login-modal" class="modal" style="display: none;">
-            <div class="modal-content">
-                <span class="modal-close" onclick="closeModal('login-modal')">&times;</span>
-                <h2>Login</h2>
-                <form id="login-form">
-                    <input type="email" placeholder="Email" required>
-                    <input type="password" placeholder="Password" required>
-                    <button class="btn btn-primary" type="submit">Login</button>
-                </form>
-                <p>Don't have an account? <a href="#" onclick="closeModal('login-modal'); showSignup();">Sign up</a></p>
-            </div>
-        </div>
-        
-        <!-- Signup Modal -->
-        <div id="signup-modal" class="modal" style="display: none;">
-            <div class="modal-content">
-                <span class="modal-close" onclick="closeModal('signup-modal')">&times;</span>
-                <h2>Join the Community</h2>
-                <form id="signup-form">
-                    <input type="text" placeholder="Name" required>
-                    <input type="email" placeholder="Email" required>
-                    <select required>
-                        <option value="">I am a...</option>
-                        <option value="parent">Parent</option>
-                        <option value="teacher">Teacher</option>
-                        <option value="tutor">Tutor</option>
-                        <option value="researcher">Researcher</option>
-                        <option value="individual">Individual with dyscalculia</option>
-                        <option value="other">Other</option>
-                    </select>
-                    <input type="password" placeholder="Password" required>
-                    <button class="btn btn-primary" type="submit">Join Community</button>
-                </form>
-                <p>Already have an account? <a href="#" onclick="closeModal('signup-modal'); showLogin();">Login</a></p>
-            </div>
-        </div>
+
     </main>
     <footer>
         <nav>
@@ -76,23 +32,6 @@
             <a href="/contact">Contact</a>
         </nav>
     </footer>
-    <script>
-        function showLogin() {
-            document.getElementById('login-modal').style.display = 'block';
-        }
-        
-        function showSignup() {
-            document.getElementById('signup-modal').style.display = 'block';
-        }
-        
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
-        }
-        
-        function logout() {
-            document.getElementById('user-menu').style.display = 'none';
-            document.getElementById('auth-btn').style.display = 'block';
-        }
-    </script>
+
 </body>
 </html>

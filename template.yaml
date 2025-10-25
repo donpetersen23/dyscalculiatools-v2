@@ -142,22 +142,6 @@ Resources:
         Project: DyscalculiaTools
         Environment: Production
       Events:
-        # Handle all routes
-        RootPath:
-          Type: HttpApi
-          Properties:
-            Path: /
-            Method: get
-        AboutPath:
-          Type: HttpApi
-          Properties:
-            Path: /about
-            Method: get
-        ToolPath:
-          Type: HttpApi
-          Properties:
-            Path: /tool/{id}
-            Method: get
         SearchAPI:
           Type: HttpApi
           Properties:
@@ -178,11 +162,6 @@ Resources:
           Properties:
             Path: /api/{proxy+}
             Method: options
-        CatchAll:
-          Type: HttpApi
-          Properties:
-            Path: /{proxy+}
-            Method: get
 
   # CloudWatch Alarms for monitoring
   LambdaErrorAlarm:

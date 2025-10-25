@@ -25,6 +25,18 @@ __pycache__/
 packaged*.yaml
 packaged*.zip
 
+# Build artifacts
+build-output.zip
+deployed-lambda.zip
+latest-build.zip
+lambda-package.zip
+lambda-url.txt
+build.log
+
+# CloudFront config files
+cf-*.json
+disable-cf.json
+
 # Config files (generated)
 current-*.json
 
